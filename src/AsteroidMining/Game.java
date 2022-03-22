@@ -5,11 +5,23 @@ import java.util.ArrayList;
 
 public class Game  {
 
+public int time;
+
+private Handler handlerObject;
+private Settler settlerObject;
+private Sunstorm sunstormObject;
+
+
+
     public ArrayList<Settler> settler;
     public ArrayList<Handler> handler;
     public ArrayList<Robot> robots;
     public ArrayList<Spaceship> spaceship;
 
+    //methods
+    public void startGame(){ }
+    public void endGame(){ }
+    public void createSunstorm( ){ }
 
 
 
