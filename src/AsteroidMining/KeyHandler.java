@@ -18,11 +18,11 @@ public class KeyHandler extends KeyAdapter {
         for(GameObject obj: handler.objects) {
             if (obj.getId() == ID.Settler) {
                 switch (key) {
-                    case KeyEvent.VK_KP_UP:
-                        obj.setVelY(5);
+                    case KeyEvent.VK_W:
+                        obj.setVelY(-5);
                         break;
                     case KeyEvent.VK_KP_DOWN:
-                        obj.setVelY(-5);
+                        obj.setVelY(5);
                         break;
                     case KeyEvent.VK_KP_LEFT:
                         obj.setVelX(-5);
@@ -35,11 +35,11 @@ public class KeyHandler extends KeyAdapter {
         }
     }
 
-    /*public void keyReleased(KeyEvent e){
+    public void keyReleased(KeyEvent e){
         int key = e.getKeyCode();
         if(settler!=null) {
             switch (key) {
-                case KeyEvent.VK_KP_UP:
+                case KeyEvent.VK_W:
                     settler.setVelY(0); break;
                 case KeyEvent.VK_KP_DOWN:
                     settler.setVelY(0); break;
@@ -49,6 +49,6 @@ public class KeyHandler extends KeyAdapter {
                     settler.setVelX(0); break;
             }
         }
-    }*/
+    }
 
 }

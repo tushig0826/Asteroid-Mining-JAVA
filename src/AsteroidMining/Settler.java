@@ -14,6 +14,7 @@ public class Settler extends Visitor{
     private BufferedImage img = null;
 
 
+
     public Settler(int x, int y) {
 
         super(x, y, ID.Settler);
@@ -28,9 +29,9 @@ public class Settler extends Visitor{
     @Override
     public void tick() {
         x = x+velX;
-        y = y+velX;
-        //System.out.println(velX);
-        //System.out.println(velY);
+        y = y+velY;
+        System.out.println(velX);
+        System.out.println(velY);
     }
 
     @Override
