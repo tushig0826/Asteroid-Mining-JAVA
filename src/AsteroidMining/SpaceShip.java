@@ -13,5 +13,9 @@ public class SpaceShip {
 
     public boolean addResource(Resource r){return false;}
     public boolean removeResource(Resource r){return true;}
-    public int countResource(Resource r){return 0;}
+
+    /**
+     * @author kasay
+     */
+    public int countResource(Resource r){return resources.get(r);}
 }
