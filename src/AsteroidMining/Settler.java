@@ -65,7 +65,6 @@ public class Settler extends Visitor{
      * @author kasay
      */
     public boolean putResource(Resource r, Asteroid a) {
-
         System.out.println("putResource(r1)");
 
         Place p = this.getPlace();
