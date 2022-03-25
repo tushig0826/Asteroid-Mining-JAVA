@@ -30,9 +30,10 @@ public class Game extends Canvas implements Runnable{
 
         new Window(WIDTH, HEIGHT, "Asteroid Mining", this);
 
-        this.requestFocusInWindow();
+        this.requestFocusInWindow(); // if this is not taken we do not take input from the user
 
     }
+    // after constructor come here
     public synchronized void start(){
         thread = new Thread(this);
         thread.start();
@@ -95,7 +96,6 @@ public class Game extends Canvas implements Runnable{
         }
 
         Graphics g = bs.getDrawGraphics();
-        g.setColor(Color.BLACK);
 
         try{
             backImg = ImageIO.read(new File("Assets/space.png"));
@@ -109,8 +109,6 @@ public class Game extends Canvas implements Runnable{
         //g.setColor(Color.black);
         //g.fillRect(0, 0, WIDTH, HEIGHT);
 
-
-        g.drawString("Welcome to Asteroid-Mining!", 10, 10);
 
         handler.render(g);
 
