@@ -26,6 +26,19 @@ public class Settler extends Visitor{
         }
     }
 
+    /**
+     * @author kasay
+     */
+    public boolean putResource(Resource r, Asteroid a){
+
+        Place p=this.getPlace();
+        if(p.equals(a)) {
+            if(a.isHollow()&&spaceship.countResource(r)>=1)
+            {}
+        }
+        return false;
+    }
+
     @Override
     public void tick() {
         x = x+velX;
