@@ -20,7 +20,11 @@ public abstract class Visitor extends GameObject {
     public void travel(int n){
 
     }
+    /**
+     * @author Kasayyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+     */
     public boolean drill(){
+
         return true;
     }
 
