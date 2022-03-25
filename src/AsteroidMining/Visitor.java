@@ -21,6 +21,8 @@ public abstract class Visitor extends GameObject {
 
     }
     public boolean drill(){
+
+        Asteroid a1 = (Asteroid)this.getPlace();
         return true;
     }
 

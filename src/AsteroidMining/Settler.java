@@ -25,6 +25,9 @@ public class Settler extends Visitor{
             e.printStackTrace();
         }
     }
+    public boolean drill(){
+        return true;
+    }
 
     @Override
     public void tick() {
