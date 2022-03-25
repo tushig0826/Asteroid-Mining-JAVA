@@ -30,8 +30,7 @@ public class Settler extends Visitor{
     public void tick() {
         x = x+velX;
         y = y+velY;
-        System.out.println(velX);
-        System.out.println(velY);
+
     }
 
     @Override
