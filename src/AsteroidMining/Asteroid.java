@@ -24,7 +24,7 @@ public class Asteroid extends Place {
             this.setId(ID.RadioActiveAsteroid);
 
         try{
-            img = ImageIO.read(new File("Assets/Asteroid1.png"));
+            img = ImageIO.read(new File("Assets/Asteroid.png"));
         }
         catch(IOException e){
             e.printStackTrace();
