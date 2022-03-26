@@ -18,9 +18,10 @@ public class KeyHandler extends KeyAdapter {
         int vel = 5;
         for(GameObject obj: handler.objects) {
             if (obj.getId() == ID.Settler) {
+                settler = (Settler)obj;
                 switch (key) {
                     case KeyEvent.VK_UP:
-                        obj.setVelY(-vel);
+                        settler.setVelY(-vel);
                         break;
                     case KeyEvent.VK_DOWN:
                         obj.setVelY(vel);
@@ -30,6 +31,12 @@ public class KeyHandler extends KeyAdapter {
                         break;
                     case KeyEvent.VK_RIGHT:
                         obj.setVelX(vel);
+                        break;
+                    case KeyEvent.VK_D:
+                        settler.drill();
+                        break;
+                    case KeyEvent.VK_H:
+                        if(settler.hide());
                         break;
                 }
             }

@@ -7,7 +7,7 @@ import java.util.List;
 public abstract class Place extends GameObject {
 
     List<Place> neighbours = new ArrayList<Place>();
-    private Visitor visitor;
+    protected Visitor visitor;
 
     public Place(int x, int y, ID id) {
         super(x, y, id);
@@ -19,6 +19,7 @@ public abstract class Place extends GameObject {
     public void addVisitor(Visitor v){
         this.visitor = v;
     }
+    public Visitor getVisitor(){return this.visitor;}
     public void removeVisitor(){
         this.visitor = null;
     }

@@ -21,9 +21,14 @@ public class Game extends Canvas implements Runnable{
     public Game(){
         handler = new Handler();
         Settler settler = new Settler(300, 400);
+        Asteroid a1 = new Asteroid(100, 500, null, 10);
+        settler.setPlace(a1);
+        a1.addVisitor(settler);
+
         handler.addObject(new Asteroid(100, 200, new Carbon(), 10));
         handler.addObject(new Asteroid(400, 220, new Iron(), 10));
         handler.addObject(new Asteroid(600, 250, new WaterIce(), 10));
+        handler.addObject(a1);
         handler.addObject(settler);
 
         this.addKeyListener(new KeyHandler(handler, this));

@@ -25,14 +25,12 @@ public class Settler extends Visitor{
             e.printStackTrace();
         }
     }
-    public boolean drill(){
-        return true;
-    }
 
     @Override
     public void tick() {
         x = x+velX;
         y = y+velY;
+
 
     }
 
@@ -40,4 +38,16 @@ public class Settler extends Visitor{
     public void render(Graphics g) {
         g.drawImage(img, x, y, 100, 100, null);
     }
+
+    public boolean mine(){
+        return true;
+    }
+    public boolean buildTeleportationGates(Handler handler){
+        return false;
+    }
+
+    public void deployGate(){
+
+    }
+
 }

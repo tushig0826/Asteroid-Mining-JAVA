@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Asteroid extends Place {
 
-    protected boolean hollow=false;
+    private boolean hollow=false;
     protected int depth;
     protected int distanceFromSun;
     protected Resource resource;
@@ -18,7 +18,12 @@ public class Asteroid extends Place {
 
     public Asteroid(int x, int y, Resource r, int depth) {
         super(x, y, ID.Asteroid);
-        this.resource = r;
+
+        if(r!=null)
+            this.resource = r;
+        else
+            this.hollow = true;
+
         this.depth = depth;
         if(resource instanceof Uranium)
             this.setId(ID.RadioActiveAsteroid);
@@ -33,6 +38,18 @@ public class Asteroid extends Place {
 
     }
 
+    @Override
+    public void tick() {
+        if(visitor!=null)
+            System.out.println("Visitor is hidden" + visitor.isHidden());
+    }
+
+    @Override
+    public void render(Graphics g) {
+
+        g.drawImage(img, x, y,depth*10,depth*10, null);
+
+    }
 
 
     public void deepenHole(int n){
@@ -57,15 +74,5 @@ public class Asteroid extends Place {
         return false;
     }
 
-    @Override
-    public void tick() {
 
-    }
-
-    @Override
-    public void render(Graphics g) {
-
-        g.drawImage(img, x, y,depth*10,depth*10, null);
-
-    }
 }

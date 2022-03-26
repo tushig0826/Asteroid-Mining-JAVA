@@ -4,8 +4,8 @@ import java.awt.*;
 
 public abstract class Visitor extends GameObject {
 
-    private boolean alive;
-    private boolean hidden;
+    private boolean alive=true;
+    private boolean hidden=false;
     private Place place;
 
     public Visitor(int x, int y, ID id) {
@@ -20,20 +20,36 @@ public abstract class Visitor extends GameObject {
     public void travel(int n){
 
     }
-    public boolean drill(){
+    public void drill(){
 
-        Asteroid a1 = (Asteroid)this.getPlace();
-        return true;
+        Asteroid a1 = (Asteroid) this.getPlace();
+
+        a1.deepenHole(1);
+
     }
 
-    public Place getPlace(){return this.place;}
+    public Place getPlace(){
+        return this.place;
+    }
+
 
     public void setPlace(Place place){
         this.place = place;
     }
 
     public boolean hide(){
-        return true;
+
+        Asteroid a1 = (Asteroid) this.getPlace();
+        if(a1!=null && a1.isHollow()){
+            hidden = true;
+
+            return true;
+        }
+        return false;
+
+    }
+    public boolean isHidden(){
+        return hidden;
     }
 
 
