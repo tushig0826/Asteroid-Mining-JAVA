@@ -8,29 +8,31 @@ public class KeyHandler extends KeyAdapter {
     private Game game;
     private Settler settler;
 
-    public KeyHandler(Handler handler, Game game){
+    public KeyHandler(Handler handler, Game game, Settler settler){
         this.handler = handler;
         this.game = game;
+        this.settler = settler;
+
     }
 
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
-        int vel = 5;
-        for(GameObject obj: handler.objects) {
-            if (obj.getId() == ID.Settler) {
-                settler = (Settler)obj;
+        //int vel = 5;
+
+                //settler = (Settler)obj;
                 switch (key) {
                     case KeyEvent.VK_UP:
-                        settler.setVelY(-vel);
+                        //settler.setVelY(-vel);
+                        settler.travel(Direction.UP);
                         break;
                     case KeyEvent.VK_DOWN:
-                        obj.setVelY(vel);
+                        settler.travel(Direction.DOWN);
                         break;
                     case KeyEvent.VK_LEFT:
-                        obj.setVelX(-vel);
+                        settler.travel(Direction.LEFT);
                         break;
                     case KeyEvent.VK_RIGHT:
-                        obj.setVelX(vel);
+                        settler.travel(Direction.RIGHT);
                         break;
                     case KeyEvent.VK_D:
                         settler.drill();
@@ -39,8 +41,8 @@ public class KeyHandler extends KeyAdapter {
                         if(settler.hide());
                         break;
                 }
-            }
-        }
+            //}
+        //}
     }
     public void keyReleased(KeyEvent e){
         int key = e.getKeyCode();

@@ -3,7 +3,7 @@ package src.AsteroidMining;
 import java.awt.*;
 
 public abstract class Visitor extends GameObject {
-
+    Handler handler;
     private boolean alive=true;
     private boolean hidden=false;
     private Place place;

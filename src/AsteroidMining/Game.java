@@ -5,8 +5,8 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Game extends Canvas implements Runnable{
 
@@ -17,13 +17,17 @@ public class Game extends Canvas implements Runnable{
     public static int HEIGHT = WIDTH / 12 * 9;
     Handler handler;
     BufferedImage backImg = null;
+    Settler settler;
+
 
     public Game(){
         handler = new Handler();
-        Settler settler = new Settler(300, 400);
+
+        settler = new Settler(300, 400, handler);
         Asteroid a1 = new Asteroid(100, 500, null, 10);
         settler.setPlace(a1);
         a1.addVisitor(settler);
+
 
         handler.addObject(new Asteroid(100, 200, new Carbon(), 10));
         handler.addObject(new Asteroid(400, 220, new Iron(), 10));
@@ -31,7 +35,8 @@ public class Game extends Canvas implements Runnable{
         handler.addObject(a1);
         handler.addObject(settler);
 
-        this.addKeyListener(new KeyHandler(handler, this));
+        this.addKeyListener(new KeyHandler(handler, this, settler));
+        this.addMouseListener(new MouseHandler(handler, this));
 
         new Window(WIDTH, HEIGHT, "Asteroid Mining", this);
 
@@ -90,6 +95,7 @@ public class Game extends Canvas implements Runnable{
     private void tick() {
         //System.out.println("Tick!");
         handler.tick();
+
     }
 
     public void render(){
@@ -101,6 +107,8 @@ public class Game extends Canvas implements Runnable{
 
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.BLACK);
+        Rectangle r1 = new Rectangle();
+        //r1.intersects()
 
         try{
             backImg = ImageIO.read(new File("Assets/space.png"));

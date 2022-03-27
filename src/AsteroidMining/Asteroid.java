@@ -34,20 +34,22 @@ public class Asteroid extends Place {
         catch(IOException e){
             e.printStackTrace();
         }
+        this.width = depth*10;
+        this.height = depth*10;
 
 
     }
 
     @Override
     public void tick() {
-        if(visitor!=null)
-            System.out.println("Visitor is hidden" + visitor.isHidden());
+
     }
 
     @Override
     public void render(Graphics g) {
-
-        g.drawImage(img, x, y,depth*10,depth*10, null);
+        g.setColor(Color.green);
+        g.drawRect(x,y, width, height);
+        g.drawImage(img, x, y,width,height, null);
 
     }
 

@@ -4,7 +4,8 @@ import java.awt.*;
 
 public abstract class GameObject {
 
-    protected int x,y, nexDestX, nextDestY, velX=0, velY=0;
+    protected int x,y, nextDestX, nextDestY, velX=0, velY=0;
+    protected int width, height, vel, gap;
 
     private ID id;
 
@@ -12,10 +13,27 @@ public abstract class GameObject {
         this.x = x;
         this.y = y;
         this.id = id;
+        //this.nextDestY =y;
+       // this.nextDestX = x;
     }
     public abstract void tick();
 
     public abstract void render(Graphics g);
+
+    public Rectangle getBounds(){
+
+        return new Rectangle(x, y, width, height);
+    }
+    public boolean checkForCollision(GameObject obj1){
+        if(!obj1.equals(this) && obj1.getBounds().intersects(this.getBounds())) {
+            //this.x-=gap;
+            //this.y-=gap;
+            System.out.println(this.getBounds() + " intersects " + obj1.getBounds());
+            vel=0;
+            return false;
+        }
+        return true;
+    }
 
     public void setX(int x) {
         this.x = x;
@@ -32,6 +50,7 @@ public abstract class GameObject {
         return this.y;
     }
     public void setVelX(int vx){
+        if(vx>0) this.gap = vx;
         this.velX = vx;
     }
     public int getVelX(int vx){
@@ -39,6 +58,7 @@ public abstract class GameObject {
     }
 
     public void setVelY(int vy){
+        if(vy>0)this.gap = vy;
         this.velY = vy;
     }
     public int getVelY(int vx){
@@ -51,5 +71,11 @@ public abstract class GameObject {
 
     public ID getId(){
         return this.id;
+    }
+    public void setNextDestX(int nx){
+        this.nextDestY=nx;
+    }
+    public void setNextDestY(int ny){
+        this.nextDestY = ny;
     }
 }
