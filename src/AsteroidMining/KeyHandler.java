@@ -3,6 +3,9 @@ package src.AsteroidMining;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * This class has responsibility for handling the events related to keyboard interrupts.
+ */
 public class KeyHandler extends KeyAdapter {
     private Handler handler;
     private Game game;

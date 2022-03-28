@@ -8,9 +8,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This class is a child class of Place, and through place it inherits an ID from Game Object. It is
+ * the parent class of RadioActiveAsteroid class, since radioactive asteroids are one distinct type
+ * of asteroid. This class stores information about whether asteroids are hollow, the depth of their
+ * rock mantle, and which resource the core is made from. Also, it contains methods such as
+ * deepening the rock mantle, adding and removing resources, determining whether the asteroid
+ * is hollow, and whether or not it is at perihelion.
+ */
 public class Asteroid extends Place {
 
-    private boolean hollow=false;
+    private boolean hollow = false;
     protected int depth;
     protected int distanceFromSun;
     protected Resource resource;
@@ -19,19 +27,18 @@ public class Asteroid extends Place {
     public Asteroid(int x, int y, Resource r, int depth) {
         super(x, y, ID.Asteroid);
 
-        if(r!=null)
+        if (r != null)
             this.resource = r;
         else
             this.hollow = true;
 
         this.depth = depth;
-        if(resource instanceof Uranium)
+        if (resource instanceof Uranium)
             this.setId(ID.RadioActiveAsteroid);
 
-        try{
+        try {
             img = ImageIO.read(new File("Assets/Asteroid.png"));
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -50,33 +57,34 @@ public class Asteroid extends Place {
     @Override
     public void render(Graphics g) {
 
-        g.drawImage(img, x, y,depth*10,depth*10, null);
+        g.drawImage(img, x, y, depth * 10, depth * 10, null);
 
     }
 
 
-    public void deepenHole(int n){
-        this.depth-=n;
+    public void deepenHole(int n) {
+        this.depth -= n;
     }
-    public Resource getResource(){
+
+    public Resource getResource() {
         return this.resource;
     }
 
-    public void addResource(Resource r){
+    public void addResource(Resource r) {
         this.resource = r;
     }
-    public void removeResource(){
+
+    public void removeResource() {
         this.resource = null;
     }
 
-    public boolean isHollow(){
+    public boolean isHollow() {
         return hollow;
     }
 
-    public boolean isPerihelion(){
+    public boolean isPerihelion() {
         return false;
     }
-
 
 
 }

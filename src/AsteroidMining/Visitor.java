@@ -3,6 +3,12 @@ package src.AsteroidMining;
 import java.awt.*;
 import java.util.AbstractList;
 
+/**
+ * The Visitor class is a parent class of Settler and Robot classes, since they share many attributes
+ * and features. It stores information about the asteroid the visitor is currently on (place), whether
+ * the visitor is hidden in a hollow asteroid, and if it is alive at all. It contains methods responsible
+ * for traveling, drilling, mining, and getting and setting the place of each visitor.
+ */
 public abstract class Visitor extends GameObject {
 
     private boolean alive = true;

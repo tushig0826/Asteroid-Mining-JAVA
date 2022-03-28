@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * this class is for..
+ * The settler class inherits many attributes and methods from the visitor class. The Settler class
+ * has a few additional attributes and methods, since a Settler has some different capabilities and
+ * responsibilities compared to the other type of visitors-robots. This class stores information about
+ * the teleportation gates and spaceship belonging to a specific settler. It contains methods
+ * exclusive to settlers - such as mining, building robots and teleportation gates, storing resources
+ * and deploying gates.
  */
 public class Settler extends Visitor {
 
@@ -45,7 +50,7 @@ public class Settler extends Visitor {
     }
 
     /**
-     * This function returns a teleportation gate at the first index that the settler currently has
+     * This function returns a teleportation gate at the first index that the settler currently has.
      *
      * @author kasay
      */

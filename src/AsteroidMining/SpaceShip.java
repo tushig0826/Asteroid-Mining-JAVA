@@ -2,8 +2,12 @@ package src.AsteroidMining;
 
 import java.util.HashMap;
 
+/**
+ * The responsibility of this class is to store attributes regarding inventory, capacity, the resources
+ * stored in the spaceship, and the settler that the spaceship belongs to. The methods deal with
+ * inventory- adding resources, removing them, and counting them.
+ */
 public class SpaceShip {
-
 
     private int capacity;
     private int currentInventory;

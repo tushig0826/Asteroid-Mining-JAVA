@@ -3,15 +3,18 @@ package src.AsteroidMining;
 import java.awt.*;
 
 /**
- * This class has responsibility for ...
+ * GameObject is responsible for dealing with existing objects in the game. During the extension or
+ * requirement changes, we will add the functions which are commonly used among derived
+ * classes. Many classes inherit their unique ID from the Game Object class, since it is their
+ * superclass.
  */
 public abstract class GameObject {
 
-    protected int x,y, nexDestX, nextDestY, velX=0, velY=0;
+    protected int x, y, nexDestX, nextDestY, velX = 0, velY = 0;
 
     private ID id;
 
-    public GameObject(int x, int y, ID id){
+    public GameObject(int x, int y, ID id) {
         this.x = x;
         this.y = y;
         this.id = id;
@@ -24,6 +27,7 @@ public abstract class GameObject {
     public void setX(int x) {
         this.x = x;
     }
+
     public void setY(int y) {
         this.y = y;
     }
@@ -31,28 +35,32 @@ public abstract class GameObject {
     public int getX() {
         return this.x;
     }
+
     public int getY() {
         return this.y;
     }
 
-    public void setVelX(int vx){
+    public void setVelX(int vx) {
         this.velX = vx;
     }
-    public int getVelX(int vx){
+
+    public int getVelX(int vx) {
         return this.velX;
     }
 
-    public void setVelY(int vy){
+    public void setVelY(int vy) {
         this.velY = vy;
     }
-    public int getVelY(int vx){
+
+    public int getVelY(int vx) {
         return this.velY;
     }
 
     public void setId(ID id) {
         this.id = id;
     }
-    public ID getId(){
+
+    public ID getId() {
         return this.id;
     }
 }

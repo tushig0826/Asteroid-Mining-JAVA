@@ -10,7 +10,8 @@ import java.nio.Buffer;
 import java.util.ArrayList;
 
 /**
- * This class handles operations of each objects in the game and rendering processes.
+ * Only one GameSystem object can exist in a game. This class has the responsibility to start and
+ * end the game, and does rendering processes. These include condition checks, creating major entities and events.
  */
 public class Game extends Canvas implements Runnable {
 
@@ -210,7 +211,7 @@ public class Game extends Canvas implements Runnable {
     /**
      * @author kasay
      */
-    public void endGame(){
+    public void endGame() {
 
     }
 

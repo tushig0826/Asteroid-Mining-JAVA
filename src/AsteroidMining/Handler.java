@@ -4,6 +4,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+/**
+ * Handler is a container that contains all necessary instances related to the played game. A
+ * settler, asteroids, robots and teleportation gates are contained. Furthermore, this has the
+ * responsibility for checking whether the asteroid is explosive or not.
+ */
 public class Handler {
 
     public LinkedList<GameObject> objects = new LinkedList<GameObject>();
@@ -44,7 +49,7 @@ public class Handler {
                 boolean perihelionOrNot = ((RadioActiveAsteroid) obj).isPerihelion();
                 System.out.println("ra1.isPerihelion(): bool");
 
-                if(perihelionOrNot==true)
+                if (perihelionOrNot == true)
                     ((RadioActiveAsteroid) obj).explode();
             }
     }

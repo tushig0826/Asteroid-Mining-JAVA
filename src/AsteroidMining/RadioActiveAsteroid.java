@@ -1,5 +1,11 @@
 package src.AsteroidMining;
 
+/**
+ * This is a child class of Asteroids. It is needed because one type of asteroid- those with uranium
+ * in their core are radioactive, and can explode when at perihelion. Since it’s a special behaviors
+ * of a particular asteroid and it as a whole retains properties of a normal asteroid we used
+ * inheritance
+ */
 public class RadioActiveAsteroid extends Asteroid {
 
     public RadioActiveAsteroid(int x, int y, Resource resource, int depth) {
