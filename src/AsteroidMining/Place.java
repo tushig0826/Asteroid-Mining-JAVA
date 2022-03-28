@@ -3,11 +3,14 @@ package src.AsteroidMining;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import static java.lang.Math.abs;
 
 public abstract class Place extends GameObject {
 
-    List<Place> neighbours = new ArrayList<Place>();
-    protected Visitor visitor;
+    static List<Place> neighbours = new ArrayList<Place>();/*List of neighbours of the place-> asteroid and telepor*/
+    protected Visitor visitor; /*Visitor of the place*/
 
     public Place(ID id) {
         super(id);
@@ -27,6 +30,10 @@ public abstract class Place extends GameObject {
 
     public List<Place> getNeighbours(){
         return neighbours;
+    }
+    public Place getNeighbour(){
+        System.out.println(this.getNeighbours());
+        return neighbours.get(3);
     }
 
     public void addNeighbour(Place p){

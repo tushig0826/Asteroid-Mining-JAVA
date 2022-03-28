@@ -17,9 +17,17 @@ public abstract class Visitor extends GameObject {
     public void travel(){
         System.out.println("travel()");
         System.out.println("Travelling to the Neighbouring asteroid..");
-        Asteroid a1 = (Asteroid) this.getPlace();
+        if(place.equals(null))
+            System.out.println("null");
+        System.out.println(place.getNeighbours());
         Random rand = new Random();
-        a1.getNeighbours().get(rand.nextInt(10)).addVisitor(this);
+        //System.out.println(place.getNeighbours().get(place.neighbours.indexOf(place)+1).getNeighbours());
+        Place a2 = place.getNeighbours().get(rand.nextInt(place.getNeighbours().size()));
+        place.removeVisitor();
+
+        a2.addVisitor(this);
+
+
 
 
     }
@@ -28,7 +36,7 @@ public abstract class Visitor extends GameObject {
         Asteroid a1 = (Asteroid) this.getPlace();
 
         if(a1.depth>=0) {
-            a1.deepenHole(1);
+            a1.deepenHole(2);
             return true;
         }else{
             System.out.println("Asteroid is fully drilled!");

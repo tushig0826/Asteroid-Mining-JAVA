@@ -15,11 +15,13 @@ public class Handler {
         if(obj instanceof Place){
             Place p = (Place)obj;
             p.neighbours.addAll(neighbours);
-            neighbours.add(p);
+            if(!neighbours.contains(p)) neighbours.add(p);
+
         }
         this.objects.add(obj);
 
     }
+
     public void removeObject(GameObject obj){
         this.objects.remove(obj);
     }

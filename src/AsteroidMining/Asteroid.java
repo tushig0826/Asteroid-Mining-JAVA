@@ -15,20 +15,22 @@ public class Asteroid extends Place {
     protected int distanceFromSun;
     protected Resource resource;
 
+    /*Initialzing the asteroid class*/
     public Asteroid(Resource r, int depth) {
         super(ID.Asteroid);
 
         if(r!=null)
             this.resource = r;
+        else
+            this.hollow=true;
 
-        if(depth==0) this.hollow=true;
         this.depth = depth;
         if(resource instanceof Uranium)
             this.setId(ID.RadioActiveAsteroid);
 
 
     }
-
+    /*Decreases the depth of the asteroid by given magnitude*/
     public void deepenHole(int n){
         this.depth-=n;
     }
@@ -41,6 +43,7 @@ public class Asteroid extends Place {
     }
     public void removeResource(){
         this.resource = null;
+        hollow= true;
     }
 
     public boolean isHollow(){
@@ -50,6 +53,7 @@ public class Asteroid extends Place {
     public boolean isPerihelion(){
         return false;
     }
+
 
 
 }

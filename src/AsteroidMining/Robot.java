@@ -11,7 +11,7 @@ private int health;
     }
 
 
-
+    /*Robot is damaged by given amount*/
     public  void getDamage( int i ){
         this.health-=i;
     }

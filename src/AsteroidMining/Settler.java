@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.Locale;
 
 public class Settler extends Visitor{
-    private List<TeleportationGate> gates;
-    private SpaceShip spaceship;
+    private List<TeleportationGate> gates; /*Settler only carries two gates to deploy*/
+    private SpaceShip spaceship; /*Settler's private spaceship*/
     private Robot robot;
 
+
+    /*Initializing the settler class*/
     public Settler(Handler handler) {
 
         super(ID.Settler);
@@ -20,16 +22,23 @@ public class Settler extends Visitor{
         this.handler = handler;
 
     }
-
+    /*Settler mining the available asteroid*/
     public boolean mine(){
         System.out.println("mine()");
         Asteroid a1 = (Asteroid) this.getPlace();
-        if(a1.depth==0 && !a1.isHollow()){
+        if(a1.depth<=0 && !(a1.isHollow())){
             if(spaceship.checkCapacity()){
                 spaceship.addResource(a1.getResource());
                 a1.removeResource();
+                System.out.println("mining!");
                 return true;
+
             }
+        }else if(a1.depth>=0){
+            System.out.println("Asteroid is not fully drilled!");
+        }
+        else if(a1.isHollow()){
+            System.out.println("Asteroid is hollow, does not contain any resources");
         }
         return false;
 
@@ -71,6 +80,7 @@ public class Settler extends Visitor{
     /*Filling the hollow asteroid with one unit of selected resource*/
     public boolean fillAsteroid() {
         System.out.println("FillAsteroid(Resource r)");
+        System.out.println("Select your resource to fill the asteroid!");
         java.util.Scanner sc = new java.util.Scanner(System.in);
         String input = sc.nextLine();
         Resource resource=null;
@@ -92,15 +102,17 @@ public class Settler extends Visitor{
         }
         return false;
     }
+
+    /*Checking the inventory of Spaceship of settler*/
     public void checkInventory(){
         System.out.println("checkInventory()");
+        System.out.println("SpaceShip's inventory:");
         for(Resource r: spaceship.resources.keySet()){
-            System.out.println("SpaceShip's inventory:");
             System.out.println(r.getType() + spaceship.resources.get(r));
         }
     }
 
-
+    /*Building the teleporation gate but if necessary resources are available*/
     public boolean buildTeleportationGates(){
         System.out.println("buildRobot()");
 
@@ -132,7 +144,7 @@ public class Settler extends Visitor{
         }
         return false;
     }
-
+    /*Deploying the new built available gate*/
     public void deployGate(){
         System.out.println("deployGate()");
         if(gates.size()==2){

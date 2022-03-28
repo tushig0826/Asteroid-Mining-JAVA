@@ -13,7 +13,7 @@ import java.util.Locale;
 public class Game{
     //"Skeleton Code:"
 
-    Handler handler;
+    Handler handler; /*handler of the game*/
 
     Settler settler;
     HashMap<Resource, Integer> necRes;
@@ -38,7 +38,7 @@ public class Game{
 
         for(Resource r: necRes.keySet()){
             int num = necRes.get(r);
-            while(num>=0){
+            while(num>0){
                 handler.addObject(new Asteroid(r, 10));
                 num--;
             }
@@ -46,10 +46,12 @@ public class Game{
         Asteroid a1 = new Asteroid(null, 10);
         a1.addVisitor(settler);
         handler.addObject(a1);
+
         System.out.println("Asteroid belt is created successfully!");
         System.out.println("Asteroids were added!");
 
     }
+    /*Ending the game, exittting*/
     public void endGame(){
         System.out.println("Game Over");
         System.exit(1);
@@ -67,13 +69,28 @@ public class Game{
             }
     }
 
+    public void determinePerihelion() {
+        System.out.println("determinePerihelion()");
 
-    public void checkWin(){
+        System.out.println("h1.checkExplosiveAsteroids()");
+        if (handler != null)
+            handler.checkExplosiveAsteroids();
 
+        for (GameObject obj : handler.objects) {
+            if (obj.getClass().getName().equals(Asteroid.class.getName())) {
+                boolean periheionOrNot = ((Asteroid) obj).isPerihelion();
+                System.out.println("a1.isPerhelion(): bool");
+
+                Resource resource = ((Asteroid) obj).getResource();
+                System.out.println("a1.getResource(): Resource");
+            }
+        }
+
+        System.out.println("Is it on perihelion, WaterIce and fullyDrilled?");
+        System.out.println("yes (automatically checked by the system because none of user inputs are required)");
     }
-    public void checkLose(){
 
-    }
+
 
 
 
@@ -93,31 +110,36 @@ public class Game{
         }
         else if(input.toLowerCase().equals("x"))
             game.endGame();
-        System.out.println("Game has been started!" +
-                "You can check test cases one by one enter corresponding Key \n" +
-                "1. Settler Travel -> 'AWSD'\n" +
-                "2. Settler Drill -> 'D'\n" +
-                "3. Settler Mine-> 'M'\n" +
-                "4. Settler Hide-> 'H'\n" +
-                "5. Fill Asteroid-> 'F'\n" +
-                "6. Check Inventory-> 'C'\n"+
-                "7. Build Robot-> 'B'\n" +
-                "8. Build Teleportation Gate-> 'T'\n" +
-                "9. Deploy Gate-> 'G'\n" +
-                "10. Sunstorm occurs-> 'SS'\n" +
-                "11. Asteroid Explosion-> 'AE'\n");
 
+        if(running) {
+            System.out.println("Game has been started!" +
+                    "You can check test cases one by one enter corresponding Key \n" +
+                    "1. Settler Travel -> 'AWSD'\n" +
+                    "2. Settler Drill -> 'D'\n" +
+                    "3. Settler Mine-> 'M'\n" +
+                    "4. Settler Hide-> 'H'\n" +
+                    "5. Fill Asteroid-> 'F'\n" +
+                    "6. Check Inventory-> 'C'\n" +
+                    "7. Build Robot-> 'B'\n" +
+                    "8. Build Teleportation Gate-> 'T'\n" +
+                    "9. Deploy Gate-> 'G'\n" +
+                    "10. Sunstorm occurs-> 'SS'\n" +
+                    "11. Asteroid Explosion-> 'AE'\n");
+        }
+
+        /*Running loop of the concole screen*/
         while(running){
+
             input = sc.nextLine();
             switch(input.toUpperCase()){
                 case "A":
                     game.settler.travel();break;
                 case "D":
-                    if(game.settler.drill()) ;break;
+                    if(!game.settler.drill()) System.out.println("You can't drill!"); ;break;
                 case "M":
                     if(game.settler.mine()) System.out.println("Mined the asteroid successfully!");break;
                 case "H":
-                    game.settler.hide();break;
+                    if(game.settler.hide()) System.out.println("Settler is hidden!");break;
                 case "F":
                     if(game.settler.fillAsteroid()) System.out.println("Filled Asteroid Successfully");break;
                 case "C":

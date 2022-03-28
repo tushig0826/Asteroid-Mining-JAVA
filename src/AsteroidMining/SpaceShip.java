@@ -4,12 +4,12 @@ import java.util.HashMap;
 
 public class SpaceShip {
 
-    private int capacity=10;
+    private int capacity=10; /*SpaceShip's max capacity*/
     private int currentInventory=0;
 
     HashMap<Resource, Integer> resources = new HashMap<Resource, Integer>();
 
-    public boolean addResource(Resource r){
+    public boolean addResource(Resource r){ /*adding resource to the inventory*/
         int num=0;
         if(currentInventory<capacity) {
             if(resources.containsKey(r)) {
@@ -36,7 +36,7 @@ public class SpaceShip {
         return false;
     }
 
-    public int countResource(ID id){
+    public int countResource(ID id){ /*Counts the resource from the inventory return amount if there is, otherwise 0*/
         for(Resource r : resources.keySet()){
             if(r.getId().equals(id))
                 return resources.get(r);
