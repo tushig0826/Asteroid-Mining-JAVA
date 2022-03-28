@@ -40,8 +40,11 @@ public class Asteroid extends Place {
 
     @Override
     public void tick() {
-        if(visitor!=null)
-            System.out.println("Visitor is hidden" + visitor.isHidden());
+        //overwhelming console output
+        //our planning skeleton specified that the test case is done by the user input "test sunstorm"
+        //contact to kasay for more details
+        /*if(visitor!=null)
+            System.out.println("Visitor is hidden" + visitor.isHidden());*/
     }
 
     @Override
@@ -73,6 +76,7 @@ public class Asteroid extends Place {
     public boolean isPerihelion(){
         return false;
     }
+
 
 
 }

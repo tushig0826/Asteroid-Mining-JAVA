@@ -2,6 +2,9 @@ package src.AsteroidMining;
 
 import java.awt.*;
 
+/**
+ * This class has responsibility for ...
+ */
 public abstract class GameObject {
 
     protected int x,y, nexDestX, nextDestY, velX=0, velY=0;
@@ -13,6 +16,7 @@ public abstract class GameObject {
         this.y = y;
         this.id = id;
     }
+
     public abstract void tick();
 
     public abstract void render(Graphics g);
@@ -27,10 +31,10 @@ public abstract class GameObject {
     public int getX() {
         return this.x;
     }
-
     public int getY() {
         return this.y;
     }
+
     public void setVelX(int vx){
         this.velX = vx;
     }
@@ -48,7 +52,6 @@ public abstract class GameObject {
     public void setId(ID id) {
         this.id = id;
     }
-
     public ID getId(){
         return this.id;
     }

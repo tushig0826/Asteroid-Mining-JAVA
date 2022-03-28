@@ -6,6 +6,7 @@ import java.util.List;
 
 public abstract class Place extends GameObject {
 
+    private TeleportationGate pairGate;
     List<Place> neighbours = new ArrayList<Place>();
     protected Visitor visitor;
 
@@ -27,9 +28,10 @@ public abstract class Place extends GameObject {
     public List<Place> getNeighbours(){
         return neighbours;
     }
-
     public void addNeighbour(Place p){
         neighbours.add(p);
     }
 
+    public void setPair(TeleportationGate t){ pairGate=t;}
+    public TeleportationGate getPair(){return pairGate;};
 }

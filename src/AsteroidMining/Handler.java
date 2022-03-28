@@ -8,34 +8,44 @@ public class Handler {
 
     public LinkedList<GameObject> objects = new LinkedList<GameObject>();
 
-    public void render(Graphics g){
-        for(GameObject obj : objects)
+    public void render(Graphics g) {
+        for (GameObject obj : objects)
             obj.render(g);
     }
-    public void tick(){
-        for(GameObject obj : objects)
+
+    public void tick() {
+        for (GameObject obj : objects)
             obj.tick();
     }
 
 
-    public void addObject( GameObject obj){
+    public void addObject(GameObject obj) {
         this.objects.addFirst(obj);
     }
-    public void removeObject(GameObject obj){
+
+    public void removeObject(GameObject obj) {
         this.objects.remove(obj);
     }
-    public Settler getSettler(){
-        for(GameObject obj : objects)
-            if(obj.getId()==ID.Settler)
+
+    public Settler getSettler() {
+        for (GameObject obj : objects)
+            if (obj.getId() == ID.Settler)
                 return (Settler) obj;
 
         return null;
     }
-    public void checkExplosiveAsteroids(){
-        for(GameObject obj : objects){
-            if(obj.getId() == ID.RadioActiveAsteroid){
-                //
+
+    /**
+     * @author kasay
+     */
+    public void checkExplosiveAsteroids() {
+        for (GameObject obj : objects)
+            if (obj.getClass().getName().equals(RadioActiveAsteroid.class.getName())) {
+                boolean perihelionOrNot = ((RadioActiveAsteroid) obj).isPerihelion();
+                System.out.println("ra1.isPerihelion(): bool");
+
+                if(perihelionOrNot==true)
+                    ((RadioActiveAsteroid) obj).explode();
             }
-        }
     }
 }
