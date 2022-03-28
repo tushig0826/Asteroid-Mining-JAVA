@@ -9,15 +9,16 @@ public abstract class Place extends GameObject {
     List<Place> neighbours = new ArrayList<Place>();
     protected Visitor visitor;
 
-    public Place(int x, int y, ID id) {
-        super(x, y, id);
+    public Place(ID id) {
+        super(id);
     }
 
-    public abstract void tick();
-    public abstract void render(Graphics g);
 
     public void addVisitor(Visitor v){
+        System.out.println("addVisitor(Visitor v)");
         this.visitor = v;
+        this.visitor.setPlace(this);
+        System.out.println("Visitor landed successfully!");
     }
     public Visitor getVisitor(){return this.visitor;}
     public void removeVisitor(){

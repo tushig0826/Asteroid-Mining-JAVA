@@ -10,45 +10,27 @@ public class Handler {
     public LinkedList<GameObject> objects = new LinkedList<GameObject>();
     ArrayList<Place> neighbours = new ArrayList<Place>();;
 
-    public void render(Graphics g){
-        for(GameObject obj : objects)
-            obj.render(g);
-    }
-    public void tick(){
-        for(GameObject obj : objects) {
-                obj.tick();
-        }
-
-        /*int i=0;
-        for(GameObject obj:objects){
-            if(!(obj.checkForCollision(objects.get(2)))){
-                obj.tick();
-            }*/
-
-
-    }
-
 
     public void addObject( GameObject obj){
+        if(obj instanceof Place){
+            Place p = (Place)obj;
+            p.neighbours.addAll(neighbours);
+            neighbours.add(p);
+        }
+        this.objects.add(obj);
 
-        this.objects.addFirst(obj);
-        if(obj instanceof Place)
-            this.neighbours.add((Place)obj);
     }
     public void removeObject(GameObject obj){
         this.objects.remove(obj);
     }
-    public Settler getSettler(){
-        for(GameObject obj : objects)
-            if(obj.getId()==ID.Settler)
-                return (Settler) obj;
 
-        return null;
-    }
     public void checkExplosiveAsteroids(){
         for(GameObject obj : objects){
             if(obj.getId() == ID.RadioActiveAsteroid){
-                //
+                RadioActiveAsteroid a1 = (RadioActiveAsteroid) obj;
+                if(a1.depth==0 && !a1.getResource().equals(null)){
+                    a1.explode(this);
+                }
             }
         }
     }
