@@ -24,6 +24,7 @@ public class Asteroid extends Place {
     protected Resource resource;
     private BufferedImage img = null;
 
+    /*Initialzing the asteroid class*/
     public Asteroid(int x, int y, Resource r, int depth) {
         super(x, y, ID.Asteroid);
 
@@ -61,7 +62,7 @@ public class Asteroid extends Place {
 
     }
 
-
+    /*Decreases the depth of the asteroid by given magnitude*/
     public void deepenHole(int n) {
         this.depth -= n;
     }

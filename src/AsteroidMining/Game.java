@@ -29,9 +29,12 @@ public class Game extends Canvas implements Runnable {
 
     public Game() {
         handler = new Handler();
+
+        /*Initializing the settler*/
         Settler settler = new Settler(300, 400);
         settler.setSpaceship(new SpaceShip());
 
+        /*Initializing the Asteroids*/
         Asteroid a1 = new Asteroid(100, 500, null, 10);
         settler.setPlace(a1);
         System.out.println("setPlace(a1)");
@@ -77,6 +80,7 @@ public class Game extends Canvas implements Runnable {
         }
     }
 
+    /*Running loop of the concole screen*/
     @Override
     public void run() {
         long lastTime = System.nanoTime();
@@ -146,6 +150,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     /**
+     * Creating sunstorm for fixed time
      * @author kasay
      */
     public void createSunStorm() {
@@ -211,8 +216,10 @@ public class Game extends Canvas implements Runnable {
     /**
      * @author kasay
      */
+    /*Ending the game, exittting*/
     public void endGame() {
-
+        System.out.println("Game Over");
+        System.exit(1);
     }
 
     public static void main(String args[]) {

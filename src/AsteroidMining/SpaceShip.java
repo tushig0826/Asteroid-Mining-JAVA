@@ -23,6 +23,7 @@ public class SpaceShip {
     }
 
     /**
+     * Checking the inventory of Spaceship
      * @author kasay
      */
     public int countResource(Resource r) {

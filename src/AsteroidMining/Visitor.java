@@ -106,6 +106,7 @@ public abstract class Visitor extends GameObject {
     }
 
     /**
+     * Hiding in the hollow asteroid
      * @author kasay
      */
     public boolean hide() {

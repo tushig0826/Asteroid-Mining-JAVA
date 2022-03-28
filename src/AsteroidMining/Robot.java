@@ -26,6 +26,7 @@ public class Robot extends Visitor {
 
     }
 
+    /*Robot is damaged by given amount*/
     public void getDamage(int i) {
 
     }

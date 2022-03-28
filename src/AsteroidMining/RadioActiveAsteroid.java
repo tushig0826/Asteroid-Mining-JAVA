@@ -13,6 +13,7 @@ public class RadioActiveAsteroid extends Asteroid {
     }
 
     /**
+     * Radio active asteroid explode method, it can be called when asteroid is on perihelion
      * @author kasay
      */
     public void explode() {

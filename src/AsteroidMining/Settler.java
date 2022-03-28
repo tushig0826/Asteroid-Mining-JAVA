@@ -18,10 +18,11 @@ import java.util.List;
  */
 public class Settler extends Visitor {
 
-    private List<TeleportationGate> gates = new ArrayList<TeleportationGate>();
-    private SpaceShip spaceship;
+    private List<TeleportationGate> gates = new ArrayList<TeleportationGate>(); /*Settler only carries two gates to deploy*/
+    private SpaceShip spaceship; /*Settler's private spaceship*/
     private BufferedImage img = null;
 
+    /*Initializing the settler class*/
     public Settler(int x, int y) {
         super(x, y, ID.Settler);
         try {
@@ -63,6 +64,7 @@ public class Settler extends Visitor {
     }
 
     /**
+     * Settler mining the available asteroid
      * @author kasay
      */
     public boolean mine() {
@@ -140,6 +142,7 @@ public class Settler extends Visitor {
     }
 
     /**
+     * Building the teleporation gate but if necessary resources are available
      * @author kasay
      */
     public boolean buildTeleportationGates() {
@@ -172,6 +175,7 @@ public class Settler extends Visitor {
     }
 
     /**
+     * Filling the hollow asteroid with one unit of selected resource
      * @author kasay
      */
     public boolean putResource(Resource r) {
@@ -215,6 +219,7 @@ public class Settler extends Visitor {
     }
 
     /**
+     * Deploying the new built available gate
      * @kasay
      */
     public void deployGate(TeleportationGate g) {
