@@ -23,10 +23,10 @@ public class Game{
     public Game(){
         handler = new Handler();
         necRes = new HashMap<Resource, Integer>();
-        necRes.put(new Carbon(), 4);
-        necRes.put(new Iron(), 4);
-        necRes.put(new Uranium(), 4);
-        necRes.put(new WaterIce(), 4);
+        necRes.put(new Carbon(), 1);
+        necRes.put(new Iron(), 1);
+        necRes.put(new Uranium(), 1);
+        necRes.put(new WaterIce(), 1);
 
 
     }

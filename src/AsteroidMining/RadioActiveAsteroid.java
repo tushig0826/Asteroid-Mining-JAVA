@@ -9,6 +9,7 @@ public class RadioActiveAsteroid extends Asteroid {
     public void explode(Handler handler){
         Visitor visitor = this.getVisitor();
 
+        /*
         if(visitor.getId().equals(ID.Settler)){
             visitor.die();
         }
@@ -17,6 +18,6 @@ public class RadioActiveAsteroid extends Asteroid {
             a2.addVisitor(visitor);
             this.removeVisitor();
         }
-        handler.removeObject(this);
+        handler.removeObject(this);*/
     }
 }

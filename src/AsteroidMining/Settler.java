@@ -66,7 +66,7 @@ public class Settler extends Visitor{
                     System.out.println("addObject(r1)");
                     //inside addObject(robot) of Handler, it calls addVisitor(robot) of Asteroid
                     System.out.println("addVisitor(r1)");
-                    this.getPlace().getNeighbours().get(2).addVisitor(robot);
+                    //this.getPlace().getNeighbours().get(2).addVisitor(robot);
                     System.out.println("Robots are automatically controlled by the system from now on.");
                     return true;
                 }
@@ -131,10 +131,13 @@ public class Settler extends Visitor{
             if (input.equals("yes")) {
                 TeleportationGate gate1 = new TeleportationGate();
                 TeleportationGate gate2 = new TeleportationGate();
+                gate1.setGate(gate2);
+                gate2.setGate(gate1);
                 gates.add(gate1);
                 System.out.println("addGate()");
                 gates.add(gate2);
                 System.out.println("addGate()");
+
 
                 return true;
             }
@@ -145,21 +148,22 @@ public class Settler extends Visitor{
         return false;
     }
     /*Deploying the new built available gate*/
-    public void deployGate(){
+   /* public void deployGate(){
         System.out.println("deployGate()");
         if(gates.size()==2){
-            gates.get(0).setGate(gates.get(1));
-            gates.get(1).setGate(gates.get(0));
-            System.out.println("setGate(gate1) -- setGate(gate2)");
-            this.getPlace().addNeighbour(gates.get(0));
+            TeleportationGate gate1 = gates.get(0);
+            //System.out.println("setGate(gate1) -- setGate(gate2)");
+            this.getPlace().addNeighbour(gate1);
             System.out.println("addNeighbour(gate1)");
             System.out.println("First gate deployed successfully!");
+            gates.remove(gate1);
         }
         else if(gates.size() == 1){
-            this.getPlace().addNeighbour(gates.get(1));
+            this.getPlace().addNeighbour(gates.get(0));
             System.out.println("addNeighbour(gate2)");
             System.out.println("Second gate deployed successfully!");
+            gates.clear();
         }
-    }
+    }*/
 
 }

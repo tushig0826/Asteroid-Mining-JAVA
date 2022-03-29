@@ -1,23 +1,25 @@
 package src.AsteroidMining;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Handler {
 
     public LinkedList<GameObject> objects = new LinkedList<GameObject>();
-    ArrayList<Place> neighbours = new ArrayList<Place>();;
-
+    //ArrayList<Place> neighbours = new ArrayList<Place>();;
+    Set<Place> set = new HashSet<Place>();
 
     public void addObject( GameObject obj){
         if(obj instanceof Place){
             Place p = (Place)obj;
-            p.neighbours.addAll(neighbours);
-            if(!neighbours.contains(p)) neighbours.add(p);
+            //objects.add(p);
+            p.getNeighbours().addAll(set);
+            set.add(p);
+            /*p.neighbours.addAll(neighbours);
+            if(!neighbours.contains(p)) neighbours.add(p);*/
 
         }
+
         this.objects.add(obj);
 
     }
