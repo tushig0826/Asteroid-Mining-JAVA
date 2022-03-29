@@ -151,7 +151,7 @@ public class Game{
                 case "SS":
                     game.createSunStorm(10);break;
                 case "AE":
-                    game.toString(); break; //
+                    game.determinePerihelion(); break; //
             }
         }
 

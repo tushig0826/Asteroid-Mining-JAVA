@@ -9,15 +9,15 @@ public class RadioActiveAsteroid extends Asteroid {
     public void explode(Handler handler){
         Visitor visitor = this.getVisitor();
 
-        /*
+
         if(visitor.getId().equals(ID.Settler)){
             visitor.die();
         }
         else if(visitor.getId().equals(ID.Robot)){
-            Asteroid a2 = (Asteroid) this.getNeighbours().get(0);
+            Asteroid a2 = (Asteroid) this.getNeighbour();
             a2.addVisitor(visitor);
             this.removeVisitor();
         }
-        handler.removeObject(this);*/
+        handler.removeObject(this);
     }
 }

@@ -148,7 +148,7 @@ public class Settler extends Visitor{
         return false;
     }
     /*Deploying the new built available gate*/
-   /* public void deployGate(){
+   public void deployGate(){
         System.out.println("deployGate()");
         if(gates.size()==2){
             TeleportationGate gate1 = gates.get(0);
@@ -164,6 +164,6 @@ public class Settler extends Visitor{
             System.out.println("Second gate deployed successfully!");
             gates.clear();
         }
-    }*/
+    }
 
 }
