@@ -63,10 +63,9 @@ public class Settler extends Visitor{
                     robot = new Robot();
 
                     handler.addObject(robot);
-                    System.out.println("addObject(r1)");
-                    //inside addObject(robot) of Handler, it calls addVisitor(robot) of Asteroid
+                    System.out.println("addObject(r1)");/*inside addObject(robot) of Handler, it calls addVisitor(robot) of Asteroid*/
                     System.out.println("addVisitor(r1)");
-                    //this.getPlace().getNeighbours().get(2).addVisitor(robot);
+                    this.getPlace().getNeighbour().addVisitor(robot);
                     System.out.println("Robots are automatically controlled by the system from now on.");
                     return true;
                 }
@@ -84,13 +83,16 @@ public class Settler extends Visitor{
         java.util.Scanner sc = new java.util.Scanner(System.in);
         String input = sc.nextLine();
         Resource resource=null;
+
+        /*we can select the resource */
+
         switch(input.toLowerCase()){
             case "uranium": resource = new Uranium(); break;
             case "iron": resource = new Iron(); break;
             case "carbon": resource = new Carbon(); break;
             case "waterIce": resource = new WaterIce(); break;
         }
-        if(!resource.equals(null)) {
+        if(resource!=null) {
             Asteroid a1 = (Asteroid) this.getPlace();
             if (a1.isHollow()) {
                 if (spaceship.removeResource(resource)) {
@@ -114,7 +116,7 @@ public class Settler extends Visitor{
 
     /*Building the teleporation gate but if necessary resources are available*/
     public boolean buildTeleportationGates(){
-        System.out.println("buildRobot()");
+        System.out.println("buildTeleportationGate()");
 
         Place p=this.getPlace();
         int nIron = spaceship.countResource(ID.Iron);
@@ -137,6 +139,7 @@ public class Settler extends Visitor{
                 System.out.println("addGate()");
                 gates.add(gate2);
                 System.out.println("addGate()");
+
 
 
                 return true;

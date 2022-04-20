@@ -9,8 +9,9 @@ import static java.lang.Math.abs;
 public abstract class Place extends GameObject {
 
     static List<Place> neighbours = new ArrayList<Place>();/*List of neighbours of the place-> asteroid and telepor*/
-    public static Set<Place> setN = new HashSet<Place>();
     protected Visitor visitor; /*Visitor of the place*/
+    //list
+    //there can 2 visitors
 
     public Place(ID id) {
         super(id);
@@ -29,30 +30,18 @@ public abstract class Place extends GameObject {
     }
 
 
-    public Set<Place> getNeighbours(){
+    public List<Place> getNeighbours(){
 
-        return setN;
+        return neighbours;
     }
 
     /*Returning the neighbouring asteroid*/
     public Place getNeighbour(){
-        for (Iterator<Place> it = setN.iterator(); it.hasNext(); ) {
-            Place p = it.next();
-            if(!p.equals(this)){
-                setN.remove(p);
-                //setN.add(this);
-                return p;
-            }
-            else{
-                return it.next();
-            }
-
-        }
-        return null;
+        return neighbours.get(0);
     }
 
     public void addNeighbour(Place p){
-        setN.add(p);
+        neighbours.add(p);
     }
 
 }

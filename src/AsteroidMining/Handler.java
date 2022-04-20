@@ -6,24 +6,31 @@ import java.util.*;
 public class Handler {
 
     public LinkedList<GameObject> objects = new LinkedList<GameObject>();
-    //ArrayList<Place> neighbours = new ArrayList<Place>();;
-    Set<Place> set = new HashSet<Place>();
+    ArrayList<Place> neighbours = new ArrayList<Place>();;
+
 
     public void addObject( GameObject obj){
         if(obj instanceof Place){
             Place p = (Place)obj;
-            //objects.add(p);
-            p.getNeighbours().addAll(set);
-            set.add(p);
-            /*p.neighbours.addAll(neighbours);
-            if(!neighbours.contains(p)) neighbours.add(p);*/
+            neighbours.add(p);
 
         }
 
         this.objects.add(obj);
 
     }
+    public void generateNbrs(){
+        for(GameObject obj: objects){
+            if(obj instanceof Place) {
+                for(Place p: neighbours){
+                    if(!p.equals((Place) obj)){
+                        ((Place) obj).addNeighbour(p);
+                    }
+                }
 
+            }
+        }
+    }
     public void removeObject(GameObject obj){
         this.objects.remove(obj);
     }
