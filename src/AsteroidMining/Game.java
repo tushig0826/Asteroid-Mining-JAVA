@@ -16,17 +16,17 @@ public class Game{
     Handler handler; /*handler of the game*/
 
     Settler settler;
-    HashMap<Resource, Integer> necRes;
+    HashMap<Resource, Integer> nResources;
     SunStorm sunStorm;
 
 
     public Game(){
         handler = new Handler();
-        necRes = new HashMap<Resource, Integer>();
-        necRes.put(new Carbon(), 1);
-        necRes.put(new Iron(), 1);
-        necRes.put(new Uranium(), 1);
-        necRes.put(new WaterIce(), 1);
+        nResources = new HashMap<Resource, Integer>();
+        nResources.put(new Carbon(), 1);
+        nResources.put(new Iron(), 1);
+        nResources.put(new Uranium(), 1);
+        nResources.put(new WaterIce(), 1);
 
 
     }
@@ -36,8 +36,8 @@ public class Game{
 
         /*Initializing the Asteroids*/
 
-        for(Resource r: necRes.keySet()){
-            int num = necRes.get(r);
+        for(Resource r: nResources.keySet()){
+            int num = nResources.get(r);
             while(num>0){
                 handler.addObject(new Asteroid(r, 10));
                 num--;
@@ -46,6 +46,7 @@ public class Game{
         Asteroid a1 = new Asteroid(null, 10);
         a1.addVisitor(settler);
         handler.addObject(a1);
+        handler.generateNbrs();
 
         System.out.println("Asteroid belt is created successfully!");
         System.out.println("Asteroids were added!");

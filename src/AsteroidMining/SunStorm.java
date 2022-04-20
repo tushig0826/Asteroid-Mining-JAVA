@@ -15,6 +15,7 @@ public class SunStorm extends GameObject {
         if(visitor!=null && !visitor.isHidden()){
             if(visitor.getId().equals(ID.Settler)){
                 visitor.die();
+                System.out.println("u dead ");
             }
             else if(visitor.getId().equals(ID.Robot)){
                 Robot r1 = (Robot) visitor;
