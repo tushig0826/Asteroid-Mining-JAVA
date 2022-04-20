@@ -8,7 +8,7 @@ import static java.lang.Math.abs;
 
 public abstract class Place extends GameObject {
 
-    static List<Place> neighbours = new ArrayList<Place>();/*List of neighbours of the place-> asteroid and telepor*/
+    List<Place> neighbours = new ArrayList<Place>();/*List of neighbours of the place-> asteroid and telepor*/
     protected Visitor visitor; /*Visitor of the place*/
     //list
     //there can 2 visitors
