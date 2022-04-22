@@ -87,10 +87,10 @@ public class Settler extends Visitor{
         /*we can select the resource */
 
         switch(input.toLowerCase()){
-            case "uranium": resource = new Uranium(); break;
-            case "iron": resource = new Iron(); break;
-            case "carbon": resource = new Carbon(); break;
-            case "waterIce": resource = new WaterIce(); break;
+            case "uranium": resource=spaceship.getResource(ID.Uranium); break;
+            case "iron": resource=spaceship.getResource(ID.Iron); break;
+            case "carbon": resource=spaceship.getResource(ID.Carbon); break;
+            case "waterice": resource=spaceship.getResource(ID.WaterIce);; break;
         }
         if(resource!=null) {
             Asteroid a1 = (Asteroid) this.getPlace();
