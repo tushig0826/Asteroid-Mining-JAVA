@@ -3,11 +3,12 @@ package src.AsteroidMining;
 import java.awt.*;
 import java.util.Random;
 
-public abstract class Visitor extends GameObject {
+public class Visitor extends GameObject {
     Handler handler;
     private boolean alive=true;
     private boolean hidden=false;
     private Place place;
+    public boolean fullydrilled =  false;
 
     public Visitor(ID id) {
         super(id);
@@ -42,7 +43,9 @@ public abstract class Visitor extends GameObject {
             a1.deepenHole(2);
             return true;
         }else{
+
             System.out.println("Asteroid is fully drilled!");
+            fullydrilled = true;
              return false;}
     }
 
