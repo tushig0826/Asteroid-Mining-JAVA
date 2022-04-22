@@ -1,53 +1,47 @@
 package src.AsteroidMining;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
-/**
- * This class is a parent class of Asteroid and TeleportationGate. These two entities are places
- * where a Visitor can be, and the Place class deals with them. It stores information about its
- * neighbors, and the visitors of the places. It inherits its id from the GameObject class.
- */
+import static java.lang.Math.abs;
+
 public abstract class Place extends GameObject {
 
-    private TeleportationGate pairGate;
-    List<Place> neighbours = new ArrayList<Place>();
-    protected Visitor visitor;
+    List<Place> neighbours = new ArrayList<Place>();/*List of neighbours of the place-> asteroid and telepor*/
+    protected Visitor visitor; /*Visitor of the place*/
+    //list
+    //there can 2 visitors
 
-    public Place(int x, int y, ID id) {
-        super(x, y, id);
+    public Place(ID id) {
+        super(id);
     }
 
-    public abstract void tick();
 
-    public abstract void render(Graphics g);
-
-    public void addVisitor(Visitor v) {
+    public void addVisitor(Visitor v){
+        System.out.println("addVisitor(Visitor v)");
         this.visitor = v;
+        this.visitor.setPlace(this);
+        System.out.println("Visitor landed successfully!");
     }
-
-    public Visitor getVisitor() {
-        return this.visitor;
-    }
-
-    public void removeVisitor() {
+    public Visitor getVisitor(){return this.visitor;}
+    public void removeVisitor(){
         this.visitor = null;
     }
 
-    public List<Place> getNeighbours() {
+
+    public List<Place> getNeighbours(){
+
         return neighbours;
     }
 
-    public void addNeighbour(Place p) {
+    /*Returning the neighbouring asteroid*/
+    public Place getNeighbour(){
+        return neighbours.get(0);
+    }
+
+    public void addNeighbour(Place p){
         neighbours.add(p);
     }
 
-    public void setPair(TeleportationGate t) {
-        pairGate = t;
-    }
-
-    public TeleportationGate getPair() {
-        return pairGate;
-    }
 }

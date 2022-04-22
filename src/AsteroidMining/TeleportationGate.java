@@ -13,19 +13,10 @@ public class TeleportationGate extends Place {
 
     private TeleportationGate pairGate;
 
-    public TeleportationGate(int x, int y, ID id) {
-        super(x, y, id);
+    public TeleportationGate() {
+        super(ID.TeleportationGate);
     }
 
-    @Override
-    public void tick() {
-
-    }
-
-    @Override
-    public void render(Graphics g) {
-
-    }
 
     public TeleportationGate getGate() {
         return pairGate;

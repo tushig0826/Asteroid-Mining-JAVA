@@ -2,44 +2,29 @@ package src.AsteroidMining;
 
 import java.awt.*;
 
-/**
- * This class stores information about the sun storm- when it occurs. It also contains the methods
- * needed for the collisions with objects of the game. The sun storm inherits its ID from the Game
- * object.
- */
 public class SunStorm extends GameObject {
     private int time;
 
-    public SunStorm(int x, int y, ID id) {
-        super(x, y, id);
+
+    public SunStorm(int time) {
+        super(ID.SunStorm);
+        this.time = time;
+    }
+    public void collisionWith(Asteroid a1){
+        Visitor visitor = a1.getVisitor();
+        if(visitor!=null && !visitor.isHidden()){
+            if(visitor.getId().equals(ID.Settler)){
+                visitor.die();
+                System.out.println("u dead ");
+            }
+            else if(visitor.getId().equals(ID.Robot)){
+                Robot r1 = (Robot) visitor;
+                r1.getDamage(5);
+                if(r1.getHealth()<=0){
+                    visitor.die();
+                }
+            }
+        }
     }
 
-    @Override
-    public void tick() {
-
-    }
-
-    @Override
-    public void render(Graphics g) {
-
-    }
-
-    /**
-     * @author kasay
-     */
-    public void setTime(int t) {
-        time = t;
-    }
-
-    ;
-
-    /**
-     * @author kasay
-     */
-    public void collisionWith(Asteroid obj) {
-        System.out.println("colisionWith(a1)");
-
-        obj.getVisitor();
-        System.out.println("getVisitor(): visitor");
-    }
 }

@@ -6,134 +6,156 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
-public class Game extends Canvas implements Runnable{
-    "Skeleton Code:"
-    private Thread thread;
-    protected static boolean running = true;
+public class Game{
+    //"Skeleton Code:"
 
-    public static int WIDTH = 1000;
-    public static int HEIGHT = WIDTH / 12 * 9;
-    Handler handler;
-    BufferedImage backImg = null;
+    Handler handler; /*handler of the game*/
+
     Settler settler;
+    HashMap<Resource, Integer> nResources;
+    SunStorm sunStorm;
 
 
     public Game(){
         handler = new Handler();
+        nResources = new HashMap<Resource, Integer>();
+        nResources.put(new Carbon(), 1);
+        nResources.put(new Iron(), 1);
+        nResources.put(new Uranium(), 1);
+        nResources.put(new WaterIce(), 1);
 
-        settler = new Settler(300, 400, handler);
-        Asteroid a1 = new Asteroid(100, 500, null, 10);
-        settler.setPlace(a1);
+
+    }
+    public void startGame(){
+        /*Initializing the settler*/
+        settler = new Settler(handler);
+
+        /*Initializing the Asteroids*/
+
+        for(Resource r: nResources.keySet()){
+            int num = nResources.get(r);
+            while(num>0){
+                handler.addObject(new Asteroid(r, 10));
+                num--;
+            }
+        }
+        Asteroid a1 = new Asteroid(null, 10);
         a1.addVisitor(settler);
-
-
-        handler.addObject(new Asteroid(100, 200, new Carbon(), 10));
-        handler.addObject(new Asteroid(400, 220, new Iron(), 10));
-        handler.addObject(new Asteroid(600, 250, new WaterIce(), 10));
         handler.addObject(a1);
-        handler.addObject(settler);
+        handler.generateNbrs();
 
-        this.addKeyListener(new KeyHandler(handler, this, settler));
-        this.addMouseListener(new MouseHandler(handler, this));
-
-        new Window(WIDTH, HEIGHT, "Asteroid Mining", this);
-
-        this.requestFocusInWindow();
+        System.out.println("Asteroid belt is created successfully!");
+        System.out.println("Asteroids were added!");
 
     }
-    public synchronized void start(){
-        thread = new Thread(this);
-        thread.start();
-        running = true;
+    /*Ending the game, exittting*/
+    public void endGame(){
+        System.out.println("Game Over");
+        System.exit(1);
     }
 
-    public synchronized void stop() {
-        try {
-            thread.join();
-            running = false;
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void run() {
-        long lastTime = System.nanoTime();
-        double amountOfTicks = 60.0;
-        double ns = 1000000000/ amountOfTicks;
-        double delta = 0;
-        long timer = System.currentTimeMillis();
-        int frames = 0;
-
-        while(running) {
-            long now = System.nanoTime();
-            delta += (now- lastTime) / ns;
-            lastTime = now;
-
-            while(delta >= 1) {
-                tick();
-                delta--;
-
+    /*Creating sunstorm for fixed time*/
+    public void createSunStorm(int time){
+        sunStorm = new SunStorm(time);
+        for(GameObject obj : handler.objects){
+            if(obj instanceof Place){
+               Asteroid a1 = (Asteroid) obj;
+                sunStorm.collisionWith(a1);
+                System.out.println("collisionWith(a1)");
+                }
             }
-            if(running) {
-                render();
-            }
+    }
 
-            frames++;
+    public void determinePerihelion() {
+        System.out.println("determinePerihelion()");
 
-            if(System.currentTimeMillis() - timer > 1000) {
-                timer += 1000;
-                //System.out.println("FPS:" + frames);
-                frames = 0;
+        System.out.println("h1.checkExplosiveAsteroids()");
+        if (handler != null)
+            handler.checkExplosiveAsteroids();
+
+        for (GameObject obj : handler.objects) {
+            if (obj.getClass().getName().equals(Asteroid.class.getName())) {
+                boolean periheionOrNot = ((Asteroid) obj).isPerihelion();
+                System.out.println("a1.isPerhelion(): bool");
+
+                Resource resource = ((Asteroid) obj).getResource();
+                System.out.println("a1.getResource(): Resource");
             }
         }
-        stop();
+
+        System.out.println("Is it on perihelion, WaterIce and fullyDrilled?");
+        System.out.println("yes (automatically checked by the system because none of user inputs are required)");
     }
 
-    private void tick() {
-        //System.out.println("Tick!");
-        handler.tick();
-
-    }
-
-    public void render(){
-        BufferStrategy bs = this.getBufferStrategy();
-        if(bs==null) {
-            this.createBufferStrategy(3);
-            return;
-        }
-
-        Graphics g = bs.getDrawGraphics();
-        g.setColor(Color.BLACK);
-        Rectangle r1 = new Rectangle();
-        //r1.intersects()
-
-        try{
-            backImg = ImageIO.read(new File("Assets/space.png"));
-            //g.drawImage(backImg,0,0, WIDTH/2, HEIGHT/2, null);
-            g.drawImage(backImg, 0,0,this);
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-
-        //g.setColor(Color.black);
-        //g.fillRect(0, 0, WIDTH, HEIGHT);
 
 
-        g.drawString("Welcome to Asteroid-Mining!", 10, 10);
 
-        handler.render(g);
-
-        g.dispose();
-        bs.show();
-    }
 
     public static void main(String args[]){
+
+         boolean running = false;
+
+        java.util.Scanner sc = new java.util.Scanner(System.in);
         Game game = new Game();
 
-        System.out.println("Hello");
+        System.out.println("StartGame()      Enter: 'S' character");
+        System.out.println("EndGame()        Enter: 'X' character");
+        String input = sc.nextLine();
+        if(input.toLowerCase().equals("s")){
+            game.startGame();
+            running = true;
+        }
+        else if(input.toLowerCase().equals("x"))
+            game.endGame();
+
+        if(running) {
+            System.out.println("Game has been started!" +
+                    "You can check test cases one by one enter corresponding Key \n" +
+                    "1. Settler Travel -> 'AWSD'\n" +
+                    "2. Settler Drill -> 'D'\n" +
+                    "3. Settler Mine-> 'M'\n" +
+                    "4. Settler Hide-> 'H'\n" +
+                    "5. Fill Asteroid-> 'F'\n" +
+                    "6. Check Inventory-> 'C'\n" +
+                    "7. Build Robot-> 'B'\n" +
+                    "8. Build Teleportation Gate-> 'T'\n" +
+                    "9. Deploy Gate-> 'G'\n" +
+                    "10. Sunstorm occurs-> 'SS'\n" +
+                    "11. Asteroid Explosion-> 'AE'\n");
+        }
+
+        /*Running loop of the concole screen*/
+        while(running){
+
+            input = sc.nextLine();
+            switch(input.toUpperCase()){
+                case "A":
+                    game.settler.travel();break;
+                case "D":
+                    if(!game.settler.drill()) System.out.println("You can't drill!"); ;break;
+                case "M":
+                    if(game.settler.mine()) System.out.println("Mined the asteroid successfully!");break;
+                case "H":
+                    if(game.settler.hide()) System.out.println("Settler is hidden!");break;
+                case "F":
+                    if(game.settler.fillAsteroid()) System.out.println("Filled Asteroid Successfully");break;
+                case "C":
+                    game.settler.checkInventory(); break;
+                case "B":
+                    if(game.settler.buildRobot()) System.out.println("You cannot build robot!"); break;
+                case "G":
+                    if(game.settler.buildTeleportationGates()) System.out.println("You cannot build teleporation gates"); break;
+                case "SS":
+                    game.createSunStorm(10);break;
+                case "AE":
+                    game.determinePerihelion(); break; //
+            }
+        }
+
+
     }
 }
