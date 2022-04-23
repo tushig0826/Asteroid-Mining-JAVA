@@ -12,6 +12,9 @@ public abstract class Visitor extends GameObject {
     public Visitor(ID id, Handler handler) {
         super(id);
     }
+    public Visitor(ID id) {
+        super(id);
+    }
 
 
     public void travel(){
