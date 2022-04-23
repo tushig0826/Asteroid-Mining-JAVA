@@ -40,6 +40,7 @@ public class Game{
             int num = nResources.get(r);
             while(num>0){
                 handler.addObject(new Asteroid(r, 10));
+                settler.spaceship.addResource(r);
                 num--;
             }
         }
@@ -50,6 +51,8 @@ public class Game{
 
         System.out.println("Asteroid belt is created successfully!");
         System.out.println("Asteroids were added!");
+
+
 
     }
     /*Ending the game, exittting*/
@@ -134,9 +137,11 @@ public class Game{
                 case "C":
                     game.settler.checkInventory(); break;
                 case "B":
-                    if(game.settler.buildRobot()) System.out.println("You cannot build robot!"); break;
+                    if(!game.settler.buildRobot()) System.out.println("You cannot build robot!"); break;
+                case "T":
+                    if(!game.settler.buildTeleportationGates()) System.out.println("You cannot build teleporation gates"); break;
                 case "G":
-                    if(game.settler.buildTeleportationGates()) System.out.println("You cannot build teleporation gates"); break;
+                    game.settler.deployGate(); break;
                 case "SS":
                     game.createSunStorm(10);break;
                 case "AE":

@@ -5,13 +5,14 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class Settler extends Visitor{
-    private List<TeleportationGate> gates; /*Settler only carries two gates to deploy*/
-    private SpaceShip spaceship; /*Settler's private spaceship*/
-    private Robot robot;
+    private List<TeleportationGate> gates = new ArrayList<>(); /*Settler only carries two gates to deploy*/
+    protected SpaceShip spaceship; /*Settler's private spaceship*/
+    protected Robot robot;
 
 
     /*Initializing the settler class*/
@@ -149,7 +150,7 @@ public class Settler extends Visitor{
         int nUranium = spaceship.countResource(ID.Uranium);
         System.out.println("countResource(\"uranium”): nUranium");
 
-        if(nIron >=2 &&  nWaterIce>=1 && nUranium >=1){
+        if(nIron >=1 &&  nWaterIce>=1 && nUranium >=1){
             System.out.println("You have enough resources! Do you want to build a teleportation gates?");
             java.util.Scanner sc = new java.util.Scanner(System.in);
             String input = sc.nextLine();
