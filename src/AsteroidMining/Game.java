@@ -73,22 +73,10 @@ public class Game{
     public void determinePerihelion() {
         System.out.println("determinePerihelion()");
 
-        System.out.println("h1.checkExplosiveAsteroids()");
-        if (handler != null)
-            handler.checkExplosiveAsteroids();
-
-        for (GameObject obj : handler.objects) {
-            if (obj.getClass().getName().equals(Asteroid.class.getName())) {
-                boolean periheionOrNot = ((Asteroid) obj).isPerihelion();
-                System.out.println("a1.isPerhelion(): bool");
-
-                Resource resource = ((Asteroid) obj).getResource();
-                System.out.println("a1.getResource(): Resource");
-            }
+        if(handler!=null){
+            handler.checkAsteroids();
         }
 
-        System.out.println("Is it on perihelion, WaterIce and fullyDrilled?");
-        System.out.println("yes (automatically checked by the system because none of user inputs are required)");
     }
 
 

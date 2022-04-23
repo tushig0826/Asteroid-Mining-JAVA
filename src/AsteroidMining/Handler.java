@@ -35,13 +35,15 @@ public class Handler {
         this.objects.remove(obj);
     }
 
-    public void checkExplosiveAsteroids(){
-        for(GameObject obj : objects){
-            if(obj.getId() == ID.RadioActiveAsteroid){
-                RadioActiveAsteroid a1 = (RadioActiveAsteroid) obj;
-                if(a1.depth==0 && !a1.getResource().equals(null)){
-                    a1.explode(this);
-                }
+    public void checkAsteroids(){
+        Iterator<GameObject> it = objects.iterator();
+        while(it.hasNext()){
+            boolean isExploded = false;
+            GameObject obj = it.next();
+            if(obj instanceof Asteroid){
+                Asteroid a1 = (Asteroid) obj;
+                a1.inPerihelion(isExploded);
+                if(isExploded) this.removeObject(obj);
             }
         }
     }
