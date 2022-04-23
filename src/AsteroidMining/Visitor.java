@@ -9,7 +9,7 @@ public abstract class Visitor extends GameObject {
     private boolean hidden=false;
     private Place place;
 
-    public Visitor(ID id) {
+    public Visitor(ID id, Handler handler) {
         super(id);
     }
 
@@ -25,7 +25,7 @@ public abstract class Visitor extends GameObject {
         Place a2 = place.getNeighbour();
         System.out.println(a2);
         System.out.println("Travelling to the Neighbouring asteroid..");
-        place.removeVisitor();
+        place.removeVisitor(this);
 
         a2.addVisitor(this);
 

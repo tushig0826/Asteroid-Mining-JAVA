@@ -6,7 +6,7 @@ public class RadioActiveAsteroid extends Asteroid {
         super(resource, depth);
     }
     /*Radio active asteroid explode method, it can be called when asteroid is on perihelion*/
-    public void explode(Handler handler){
+    /*public void explode(Handler handler){
         Visitor visitor = this.getVisitor();
 
 
@@ -19,5 +19,5 @@ public class RadioActiveAsteroid extends Asteroid {
             this.removeVisitor();
         }
         handler.removeObject(this);
-    }
+    }*/
 }

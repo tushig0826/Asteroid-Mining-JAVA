@@ -17,7 +17,7 @@ public class Settler extends Visitor{
     /*Initializing the settler class*/
     public Settler(Handler handler) {
 
-        super(ID.Settler);
+        super(ID.Settler, handler);
         spaceship = new SpaceShip();
         this.handler = handler;
 
@@ -79,31 +79,54 @@ public class Settler extends Visitor{
     /*Filling the hollow asteroid with one unit of selected resource*/
     public boolean fillAsteroid() {
         System.out.println("FillAsteroid(Resource r)");
-        System.out.println("Select your resource to fill the asteroid!");
-        java.util.Scanner sc = new java.util.Scanner(System.in);
-        String input = sc.nextLine();
-        Resource resource=null;
-
-        /*we can select the resource */
-
-        switch(input.toLowerCase()){
-            case "uranium": resource = new Uranium(); break;
-            case "iron": resource = new Iron(); break;
-            case "carbon": resource = new Carbon(); break;
-            case "waterIce": resource = new WaterIce(); break;
+        Asteroid a1 = (Asteroid) this.getPlace();
+        if (!a1.isFullyDrilled()) {
+            System.out.println("Current asteroid is not fully drilled!");
+            return false;
         }
-        if(resource!=null) {
-            Asteroid a1 = (Asteroid) this.getPlace();
-            if (a1.isHollow()) {
+        if (a1.isHollow()) {
+            System.out.println("Select your resource to fill the asteroid!");
+            java.util.Scanner sc = new java.util.Scanner(System.in);
+            String input = sc.nextLine();
+            Resource resource = null;
+
+            /*we can select the resource */
+
+            switch (input.toLowerCase()) {
+                case "uranium":
+                    resource = spaceship.getResource(ID.Uranium);
+                    break;
+                case "iron":
+                    resource = spaceship.getResource(ID.Iron);
+                    break;
+                case "carbon":
+                    resource = spaceship.getResource(ID.Carbon);
+                    break;
+                case "waterice":
+                    resource = spaceship.getResource(ID.WaterIce);
+                    ;
+                    break;
+            }
+
+            if (resource != null) {
                 if (spaceship.removeResource(resource)) {
                     a1.addResource(resource);
                     System.out.println("a1.addResource(resource)");
                     return true;
                 }
             }
+            else{
+                System.out.println("You dont have enough resource!");
+                return false;
+            }
+        }
+        else {
+            System.out.println("Asteroid is not hollow!");
+            return false;
         }
         return false;
     }
+
 
     /*Checking the inventory of Spaceship of settler*/
     public void checkInventory(){

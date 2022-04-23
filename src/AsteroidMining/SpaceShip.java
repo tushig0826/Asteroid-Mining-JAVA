@@ -43,6 +43,13 @@ public class SpaceShip {
         }
         return 0;
     }
+    public Resource getResource(ID id){
+        if(countResource(id)>0)
+            for(Resource r : resources.keySet())
+                if(r.getId().equals(id))
+                    return r;
+        return null;
+    }
 
     public boolean checkCapacity(){
         if(currentInventory<=capacity)

@@ -6,7 +6,10 @@ public class WaterIce extends Resource{
         this.type = "WaterIce";
     }
 
-    public void sublime() { }
+    public void sublime(Asteroid a) {
+        System.out.println("Water ice is subliming..");
+        a.removeResource();
+    }
 
 
 }
