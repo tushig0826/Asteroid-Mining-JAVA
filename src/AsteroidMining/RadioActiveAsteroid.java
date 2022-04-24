@@ -1,5 +1,5 @@
 package src.AsteroidMining;
-
+/*Initializing RadioActiveAsteroid*/
 public class RadioActiveAsteroid extends Asteroid {
 
     public RadioActiveAsteroid(int x, int y, Resource resource, int depth) {

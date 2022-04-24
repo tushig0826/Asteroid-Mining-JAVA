@@ -11,11 +11,11 @@ public class GameObject {
 
     }
 
-
+    /*Getting the identifier of the object*/
     public ID getId(){
         return this.id;
     }
-
+    /*Setting the identifier of the object*/
     public void setId(ID id) {
         this.id = id;
     }
