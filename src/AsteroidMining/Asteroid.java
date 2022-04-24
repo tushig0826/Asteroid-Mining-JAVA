@@ -15,7 +15,7 @@ public class Asteroid extends Place {
     private boolean isPerihelion;
     private Resource resource;
 
-    /*Initialzing the asteroid class*/
+    /*Constructing the asteroid class*/
     public Asteroid(Resource r, int depth) {
         super(ID.Asteroid);
 
