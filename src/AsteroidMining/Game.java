@@ -72,7 +72,7 @@ public class Game{
                 }
             }
     }
-
+    /*Determining the Perihelion state*/
     public void determinePerihelion() {
         System.out.println("determinePerihelion()");
 

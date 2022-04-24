@@ -1,7 +1,7 @@
 package src.AsteroidMining;
 
 import java.awt.*;
-
+/*Initializing GameObject for setting and getting identifier*/
 public class GameObject {
 
     protected ID id;

@@ -1,5 +1,5 @@
 package src.AsteroidMining;
-
+/*Initializing resource "WaterIce"*/
 public class WaterIce extends Resource{
     public WaterIce() {
         super(ID.WaterIce);
