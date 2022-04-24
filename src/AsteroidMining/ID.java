@@ -1,5 +1,5 @@
 package src.AsteroidMining;
-
+/*Initializing identifier enumeration*/
 public enum ID {
     Settler(),
     Robot(),

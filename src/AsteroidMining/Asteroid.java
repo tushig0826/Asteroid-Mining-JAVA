@@ -7,7 +7,7 @@ import java.awt.image.ImagingOpException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
+/*Initializing the Asteroid class*/
 public class Asteroid extends Place {
 
     private boolean hollow=false;
@@ -15,7 +15,7 @@ public class Asteroid extends Place {
     private boolean isPerihelion;
     private Resource resource;
 
-    /*Initialzing the asteroid class*/
+    /*Constructing the asteroid class*/
     public Asteroid(Resource r, int depth) {
         super(ID.Asteroid);
 

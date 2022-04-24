@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-
+/*Initializing Main Game class*/
 public class Game{
     //"Skeleton Code:"
 
@@ -19,7 +19,7 @@ public class Game{
     HashMap<Resource, Integer> nResources;
     SunStorm sunStorm;
 
-
+    /*Constructing the Game*/
     public Game(){
         handler = new Handler();
         nResources = new HashMap<Resource, Integer>();
@@ -30,6 +30,7 @@ public class Game{
 
 
     }
+    /*Starting the game*/
     public void startGame(){
         /*Initializing the settler*/
         settler = new Settler(handler);
@@ -72,7 +73,7 @@ public class Game{
                 }
             }
     }
-
+    /*Determining the Perihelion state*/
     public void determinePerihelion() {
         System.out.println("determinePerihelion()");
 
