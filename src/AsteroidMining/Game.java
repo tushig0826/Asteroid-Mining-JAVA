@@ -146,6 +146,9 @@ public class Game{
                     game.createSunStorm(10);break;
                 case "AE":
                     game.determinePerihelion(); break; //
+                case "X":
+                    game.endGame(); break; // end the game in between
+
             }
         }
 
