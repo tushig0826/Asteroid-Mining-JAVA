@@ -5,7 +5,7 @@ public class WaterIce extends Resource{
         super(ID.WaterIce);
         this.type = "WaterIce";
     }
-
+    /*Subliming the water ice*/
     public void sublime(Asteroid a) {
         System.out.println("Water ice is subliming..");
         a.removeResource();
