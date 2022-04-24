@@ -160,9 +160,9 @@ public class Settler extends Visitor{
                 gate1.setGate(gate2);
                 gate2.setGate(gate1);
                 gates.add(gate1);
-                System.out.println("addGate()");
+                System.out.println("First Gate Added- addGate()");
                 gates.add(gate2);
-                System.out.println("addGate()");
+                System.out.println("Second Gate Added- addGate()");
 
 
 
@@ -178,7 +178,7 @@ public class Settler extends Visitor{
    public void deployGate(){
         System.out.println("deployGate()");
         if(gates.size()==2){
-            TeleportationGate gate1 = gates.get(0);
+            TeleportationGate gate1 = gates.get(0); // creating the gate
             //System.out.println("setGate(gate1) -- setGate(gate2)");
             this.getPlace().addNeighbour(gate1);
             System.out.println("addNeighbour(gate1)");
