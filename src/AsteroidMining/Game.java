@@ -1,15 +1,7 @@
 package src.AsteroidMining;
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-/*Initializing Main Game class*/
+
 public class Game{
     //"Skeleton Code:"
 
@@ -19,7 +11,7 @@ public class Game{
     HashMap<Resource, Integer> nResources;
     SunStorm sunStorm;
 
-    /*Constructing the Game*/
+
     public Game(){
         handler = new Handler();
         nResources = new HashMap<Resource, Integer>();
@@ -30,7 +22,6 @@ public class Game{
 
 
     }
-    /*Starting the game*/
     public void startGame(){
         /*Initializing the settler*/
         settler = new Settler(handler);
@@ -73,7 +64,7 @@ public class Game{
                 }
             }
     }
-    /*Determining the Perihelion state*/
+
     public void determinePerihelion() {
         System.out.println("determinePerihelion()");
 
@@ -107,7 +98,7 @@ public class Game{
         if(running) {
             System.out.println("Game has been started!" +
                     "You can check test cases one by one enter corresponding Key \n" +
-                    "1. Settler Travel -> 'AWSD'\n" +
+                    "1. Settler Travel -> 'A'\n" +
                     "2. Settler Drill -> 'D'\n" +
                     "3. Settler Mine-> 'M'\n" +
                     "4. Settler Hide-> 'H'\n" +
@@ -148,6 +139,7 @@ public class Game{
                 case "AE":
                     game.determinePerihelion(); break; //
                 case "X":
+                    running = false;
                     game.endGame(); break; // end the game in between
 
             }
