@@ -1,7 +1,7 @@
 package src.AsteroidMining;
 
 import java.util.HashMap;
-
+/*Initializing SpaceShip*/
 public class SpaceShip {
 
     private int capacity=10; /*SpaceShip's max capacity*/
@@ -9,7 +9,8 @@ public class SpaceShip {
 
     HashMap<Resource, Integer> resources = new HashMap<Resource, Integer>();
 
-    public boolean addResource(Resource r){ /*adding resource to the inventory*/
+    /*adding resource to the inventory*/
+    public boolean addResource(Resource r){
         int num=0;
         if(currentInventory<capacity) {
             if(resources.containsKey(r)) {
@@ -26,7 +27,7 @@ public class SpaceShip {
         else return false;
 
     }
-
+    /*removing resource from the inventory*/
     public boolean removeResource(Resource r){
         if(resources.containsKey(r)){
             resources.remove(r, 1);
@@ -35,7 +36,7 @@ public class SpaceShip {
         }
         return false;
     }
-
+    /*Counting resource of the inventory*/
     public int countResource(ID id){ /*Counts the resource from the inventory return amount if there is, otherwise 0*/
         for(Resource r : resources.keySet()){
             if(r.getId().equals(id))
@@ -50,7 +51,7 @@ public class SpaceShip {
                     return r;
         return null;
     }
-
+    /*Checking the capacity of inventory*/
     public boolean checkCapacity(){
         if(currentInventory<=capacity)
             return true;

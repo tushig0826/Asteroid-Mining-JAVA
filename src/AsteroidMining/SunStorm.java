@@ -1,15 +1,16 @@
 package src.AsteroidMining;
 
 import java.awt.*;
-
+/*Initializing Sunstorm*/
 public class SunStorm extends GameObject {
     private int time;
 
-
+    /*Constructing the class Sunstorm*/
     public SunStorm(int time) {
         super(ID.SunStorm);
         this.time = time;
     }
+    /*Checking the Collison*/
     public void collisionWith(Asteroid a1){
         for(Visitor visitor: a1.getVisitors()){
             if(visitor!=null && !visitor.isHidden()){
