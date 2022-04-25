@@ -2,13 +2,13 @@ package src.AsteroidMining;
 
 import java.awt.*;
 import java.util.*;
-
+/*Initializing object handler class*/
 public class Handler {
 
     public LinkedList<GameObject> objects = new LinkedList<GameObject>();
     ArrayList<Place> neighbours = new ArrayList<Place>();;
 
-
+    /*Adding object*/
     public void addObject( GameObject obj){
         if(obj instanceof Place){
             Place p = (Place)obj;
@@ -19,6 +19,7 @@ public class Handler {
         this.objects.add(obj);
 
     }
+    /*Generating neighbours of the place*/
     public void generateNbrs(){
         for(GameObject obj: objects){
             if(obj instanceof Place) {
@@ -31,10 +32,11 @@ public class Handler {
             }
         }
     }
+    /*Removing objects*/
     public void removeObject(GameObject obj){
         this.objects.remove(obj);
     }
-
+    /*Checking asteroids if it is exploded*/
     public void checkAsteroids(){
         Iterator<GameObject> it = objects.iterator();
         while(it.hasNext()){

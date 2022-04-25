@@ -1,14 +1,6 @@
 package src.AsteroidMining;
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 
 public class Game{
     //"Skeleton Code:"
@@ -82,10 +74,6 @@ public class Game{
 
     }
 
-
-
-
-
     public static void main(String args[]){
 
          boolean running = false;
@@ -106,7 +94,7 @@ public class Game{
         if(running) {
             System.out.println("Game has been started!" +
                     "You can check test cases one by one enter corresponding Key \n" +
-                    "1. Settler Travel -> 'AWSD'\n" +
+                    "1. Settler Travel -> 'A'\n" +
                     "2. Settler Drill -> 'D'\n" +
                     "3. Settler Mine-> 'M'\n" +
                     "4. Settler Hide-> 'H'\n" +
@@ -116,7 +104,9 @@ public class Game{
                     "8. Build Teleportation Gate-> 'T'\n" +
                     "9. Deploy Gate-> 'G'\n" +
                     "10. Sunstorm occurs-> 'SS'\n" +
-                    "11. Asteroid Explosion-> 'AE'\n");
+                    "11. Determine Perihelion-> 'AE'\n"+
+                    "12. Build SpaceStation-> 'BS'\n" +
+                    "13. End Game-> 'X'\n");
         }
 
         /*Running loop of the concole screen*/
@@ -140,6 +130,8 @@ public class Game{
                     if(!game.settler.buildRobot()) System.out.println("You cannot build robot!"); break;
                 case "T":
                     if(!game.settler.buildTeleportationGates()) System.out.println("You cannot build teleporation gates"); break;
+                case "BS":
+                    if(game.settler.buildSpaceStation()){ System.out.println("You have won the game!"); System.exit(1);} break;
                 case "G":
                     game.settler.deployGate(); break;
                 case "SS":
@@ -147,6 +139,7 @@ public class Game{
                 case "AE":
                     game.determinePerihelion(); break; //
                 case "X":
+                    running = false;
                     game.endGame(); break; // end the game in between
 
             }
