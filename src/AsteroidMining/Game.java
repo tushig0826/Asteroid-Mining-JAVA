@@ -74,10 +74,6 @@ public class Game{
 
     }
 
-
-
-
-
     public static void main(String args[]){
 
          boolean running = false;
@@ -108,7 +104,9 @@ public class Game{
                     "8. Build Teleportation Gate-> 'T'\n" +
                     "9. Deploy Gate-> 'G'\n" +
                     "10. Sunstorm occurs-> 'SS'\n" +
-                    "11. Asteroid Explosion-> 'AE'\n");
+                    "11. Determine Perihelion-> 'AE'\n"+
+                    "12. Build SpaceStation-> 'BS'\n" +
+                    "13. End Game-> 'X'\n");
         }
 
         /*Running loop of the concole screen*/
@@ -132,6 +130,8 @@ public class Game{
                     if(!game.settler.buildRobot()) System.out.println("You cannot build robot!"); break;
                 case "T":
                     if(!game.settler.buildTeleportationGates()) System.out.println("You cannot build teleporation gates"); break;
+                case "BS":
+                    if(game.settler.buildSpaceStation()){ System.out.println("You have won the game!"); System.exit(1);} break;
                 case "G":
                     game.settler.deployGate(); break;
                 case "SS":

@@ -63,11 +63,14 @@ public class Settler extends Visitor{
                 if (input.equals("yes")) {
                     robot = new Robot();
 
-                    handler.addObject(robot);
-                    System.out.println("addObject(r1)");/*inside addObject(robot) of Handler, it calls addVisitor(robot) of Asteroid*/
-                    System.out.println("addVisitor(r1)");
+                    handler.addObject(robot);/*inside addObject(robot) of Handler, it calls addVisitor(robot) of Asteroid*/
+                    System.out.println("Robot has been created successfully!");
                     this.getPlace().getNeighbour().addVisitor(robot);
                     System.out.println("Robots are automatically controlled by the system from now on.");
+                    this.spaceship.removeResource(ID.Carbon, 1);
+                    this.spaceship.removeResource(ID.Uranium, 1);
+                    this.spaceship.removeResource(ID.Iron, 1);
+
                     return true;
                 }
             }
@@ -112,7 +115,7 @@ public class Settler extends Visitor{
             if (resource != null) {
                 if (spaceship.removeResource(resource)) {
                     a1.addResource(resource);
-                    System.out.println("a1.addResource(resource)");
+                    //System.out.println("a1.addResource(resource)");
                     return true;
                 }
             }
@@ -134,7 +137,7 @@ public class Settler extends Visitor{
         System.out.println("checkInventory()");
         System.out.println("SpaceShip's inventory:");
         for(Resource r: spaceship.resources.keySet()){
-            System.out.println(r.getType() + spaceship.resources.get(r));
+            System.out.println(r.getType() + "->" + spaceship.resources.get(r));
         }
     }
 
@@ -164,6 +167,9 @@ public class Settler extends Visitor{
                 gates.add(gate2);
                 System.out.println("Second Gate Added- addGate()");
 
+                this.spaceship.removeResource(ID.Uranium, 1);
+                this.spaceship.removeResource(ID.Iron, 1);
+                this.spaceship.removeResource(ID.WaterIce, 1);
 
 
                 return true;
@@ -191,6 +197,43 @@ public class Settler extends Visitor{
             System.out.println("Second gate deployed successfully!");
             gates.clear();
         }
+        else{
+            System.out.println("You have no new build Teleportation Gates");
+        }
+    }
+    public boolean buildSpaceStation(){
+        System.out.println("buildSpacaStation()");
+
+        Place p=this.getPlace();
+        int nIron = spaceship.countResource(ID.Iron);
+        System.out.println("countResource(\"iron”): nIron");
+        int nCarbon = spaceship.countResource(ID.Carbon);
+        System.out.println("countResource(\"carbon”): nCarbon");
+        int nUranium = spaceship.countResource(ID.Uranium);
+        System.out.println("countResource(\"uranium”): nUranium");
+        int nWaterIce = spaceship.countResource(ID.WaterIce);
+        System.out.println("countResource(\"uranium”): waterIce");
+
+        if(nIron >=3 && nCarbon >=3 && nUranium >=3 && nWaterIce>=3){
+            System.out.println("You have enough resources! Do you want to build a SpaceStation?");
+            java.util.Scanner sc = new java.util.Scanner(System.in);
+            String input = sc.nextLine();
+            if (input.equals("yes")) {
+                robot = new Robot();
+
+
+                System.out.println("SpaceStation is built successfully!");
+                this.spaceship.removeResource(ID.Carbon, 3);
+                this.spaceship.removeResource(ID.Uranium, 3);
+                this.spaceship.removeResource(ID.Iron, 3);
+                this.spaceship.removeResource(ID.WaterIce, 3);
+                return true;
+            }
+        }
+        else{
+            System.out.println("You do not have enough resources!");
+        }
+        return false;
     }
 
 }

@@ -36,6 +36,15 @@ public class SpaceShip {
         }
         return false;
     }
+    public boolean removeResource(ID id, int num){
+        Resource r = getResource(id);
+        if(resources.containsKey(r)){
+            resources.remove(r, num);
+            currentInventory--;
+            return true;
+        }
+        return false;
+    }
     /*Counting resource of the inventory*/
     public int countResource(ID id){ /*Counts the resource from the inventory return amount if there is, otherwise 0*/
         for(Resource r : resources.keySet()){
