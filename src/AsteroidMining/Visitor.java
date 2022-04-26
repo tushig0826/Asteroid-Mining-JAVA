@@ -22,18 +22,15 @@ public abstract class Visitor extends GameObject {
 
         if(place.equals(null))
             System.out.println("null");
-        System.out.println(place.getNeighbours());
-        Random rand = new Random();
 
-        Place a2 = place.getNeighbour();
-        System.out.println(a2);
-        System.out.println("Travelling to the Neighbouring asteroid..");
+        System.out.println(place);
+        System.out.println(handler.neighbours);
         place.removeVisitor(this);
-
-        a2.addVisitor(this);
-
-
-
+        handler.neighbours.remove(place);
+        handler.neighbours.add(place);
+        handler.neighbours.get(0).addVisitor(this);
+        System.out.println(place);
+        System.out.println("Travelling to the Neighbouring asteroid..");
 
 
     }
