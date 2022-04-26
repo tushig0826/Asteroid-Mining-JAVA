@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 /*Initializing the Asteroid class*/
+
 public class Asteroid extends Place {
 
     private boolean hollow=false;

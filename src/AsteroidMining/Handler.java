@@ -6,7 +6,8 @@ import java.util.*;
 public class Handler {
 
     public LinkedList<GameObject> objects = new LinkedList<GameObject>();
-    ArrayList<Place> neighbours = new ArrayList<Place>();;
+    ArrayList<Place> neighbours = new ArrayList<Place>();
+    //Set<Place> neighbours = new HashSet<>();
 
     /*Adding object*/
     public void addObject( GameObject obj){

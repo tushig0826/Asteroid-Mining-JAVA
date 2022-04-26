@@ -12,6 +12,7 @@ public class Game{
     SunStorm sunStorm;
 
 
+
     public Game(){
         handler = new Handler();
         nResources = new HashMap<Resource, Integer>();
@@ -19,8 +20,6 @@ public class Game{
         nResources.put(new Iron(), 1);
         nResources.put(new Uranium(), 1);
         nResources.put(new WaterIce(), 1);
-
-
     }
     public void startGame(){
         /*Initializing the settler*/
