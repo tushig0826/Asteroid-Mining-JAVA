@@ -6,8 +6,11 @@ public class TeleportationGate extends Place {
 
     private TeleportationGate pairGate;
 
-    public TeleportationGate(int x, int y, ID id) {
-        super(x, y, id);
+    public TeleportationGate(int x, int y) {
+        super(x, y, ID.TeleportationGate);
+    }
+    public TeleportationGate() {
+        super(ID.TeleportationGate);
     }
 
     @Override
@@ -20,10 +23,11 @@ public class TeleportationGate extends Place {
 
     }
 
+    /*Geting gate*/
     public TeleportationGate getGate(){
         return pairGate;
     }
-
+    /*Setting gate*/
     public void setGate(TeleportationGate gate) {
         this.pairGate = gate;
     }

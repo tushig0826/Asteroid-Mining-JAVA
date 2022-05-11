@@ -1,9 +1,22 @@
 package src.AsteroidMining;
 
-public class Resource {
-    private String type;
+import java.awt.*;
 
-    public String getType(){
-        return " ";
+public class Resource extends GameObject {
+    protected String type;
+    /*Constructing the resource*/
+    public Resource(ID id){super(id);}
+
+    @Override
+    public void tick() {
+
     }
+
+    @Override
+    public void render(Graphics g) {
+
+    }
+
+    /*Getting the type of the resource*/
+    public String getType(){ return this.type;}
 }

@@ -6,8 +6,11 @@ public class Robot extends Visitor {
 
 private int health;
 
-    public Robot(int x, int y, ID id) {
-        super(x, y, id);
+    public Robot(int x, int y) {
+        super(x, y, ID.Robot);
+    }
+    public Robot() {
+        super(ID.Robot);
     }
 
     @Override
@@ -19,7 +22,13 @@ private int health;
     public void render(Graphics g) {
 
     }
-
-    public  void getDamage( int i ){ }
+    /*Robot is damaged by given amount*/
+    public  void getDamage( int i ){
+        this.health-=i;
+    }
+    /*Getting the Robots health status*/
+    public int getHealth(){
+        return health;
+    }
 
 }

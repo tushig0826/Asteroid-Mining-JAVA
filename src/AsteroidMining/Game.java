@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Game extends Canvas implements Runnable{
 
@@ -17,10 +18,21 @@ public class Game extends Canvas implements Runnable{
     public static int HEIGHT = WIDTH / 12 * 9;
     Handler handler;
     BufferedImage backImg = null;
+    Settler settler;
+    HashMap<Resource, Integer> nResources;
+    SunStorm sunStorm;
 
     public Game(){
+
+
         handler = new Handler();
-        Settler settler = new Settler(300, 400);
+        nResources = new HashMap<Resource, Integer>();
+        nResources.put(new Carbon(), 1);
+        nResources.put(new Iron(), 1);
+        nResources.put(new Uranium(), 1);
+        nResources.put(new WaterIce(), 1);
+
+        Settler settler = new Settler(300, 400, handler);
         Asteroid a1 = new Asteroid(100, 500, null, 10);
         settler.setPlace(a1);
         a1.addVisitor(settler);
@@ -85,6 +97,31 @@ public class Game extends Canvas implements Runnable{
             }
         }
         stop();
+    }
+    /*Ending the game, exittting*/
+    public void endGame(){
+        System.out.println("Game Over");
+        System.exit(1);
+    }
+
+    /*Creating sunstorm for fixed time*/
+    public void createSunStorm(int x, int y, int time){
+        sunStorm = new SunStorm(x,y, time);
+        for(GameObject obj : handler.objects){
+            if(obj instanceof Place){
+                Asteroid a1 = (Asteroid) obj;
+                sunStorm.collisionWith(a1);
+                System.out.println("collisionWith(a1)");
+            }
+        }
+    }
+    public void determinePerihelion() {
+        System.out.println("determinePerihelion()");
+
+        if(handler!=null){
+            handler.checkAsteroids();
+        }
+
     }
 
     private void tick() {
