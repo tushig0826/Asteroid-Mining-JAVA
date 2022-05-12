@@ -1,17 +1,13 @@
 package src.AsteroidMining;
 
-import javax.imageio.ImageIO;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class KeyHandler extends KeyAdapter {
     private Handler handler;
     private Game game;
     private Settler settler;
-    private Asteroid asteroid;
 
     public KeyHandler(Handler handler, Game game){
         this.handler = handler;
@@ -41,7 +37,11 @@ public class KeyHandler extends KeyAdapter {
                         settler.drill();
                         break;
                     case KeyEvent.VK_H:
-                        if(settler.hide());
+                        try {
+                            if(settler.hide());
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
                         break;
                 }
             }

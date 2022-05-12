@@ -85,7 +85,11 @@ public class Game extends Canvas implements Runnable{
 
             }
             if(running) {
-                render();
+                try {
+                    render();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             frames++;
@@ -129,7 +133,7 @@ public class Game extends Canvas implements Runnable{
         handler.tick();
     }
 
-    public void render(){
+    public void render() throws IOException {
         BufferStrategy bs = this.getBufferStrategy();
         if(bs==null) {
             this.createBufferStrategy(3);

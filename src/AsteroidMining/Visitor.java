@@ -13,6 +13,7 @@ public abstract class Visitor extends GameObject {
     private Place place;
     private BufferedImage img = null;
 
+
     public Visitor(ID id, Handler handler) {
         super(id);
     }
@@ -27,7 +28,7 @@ public abstract class Visitor extends GameObject {
     //@Override
     public abstract void tick();
 
-    public abstract void render(Graphics g);
+    public abstract void render(Graphics g) throws IOException;
 
     public void travel(){
         System.out.println("travel()");
@@ -68,8 +69,12 @@ public abstract class Visitor extends GameObject {
     }
 
     /*Hiding in the hollow asteroid*/
-    public boolean hide(){
+    public boolean hide() throws IOException {
         System.out.println("hide()");
+   if (isHidden() ){
+       hidden = false;
+   return true;
+   }
 
         Asteroid a1 = (Asteroid) this.getPlace();
         if(a1!=null && a1.isHollow()){

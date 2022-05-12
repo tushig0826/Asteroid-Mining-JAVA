@@ -1,6 +1,7 @@
 package src.AsteroidMining;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -10,7 +11,7 @@ public class Handler {
     public LinkedList<GameObject> objects = new LinkedList<GameObject>();
     ArrayList<Place> neighbours = new ArrayList<Place>();
 
-    public void render(Graphics g){
+    public void render(Graphics g) throws IOException {
         for(GameObject obj : objects)
             obj.render(g);
     }
