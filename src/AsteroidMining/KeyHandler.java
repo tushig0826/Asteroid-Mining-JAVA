@@ -2,6 +2,7 @@ package src.AsteroidMining;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 public class KeyHandler extends KeyAdapter {
     private Handler handler;
@@ -36,7 +37,11 @@ public class KeyHandler extends KeyAdapter {
                         settler.drill();
                         break;
                     case KeyEvent.VK_H:
-                        if(settler.hide());
+                        try {
+                            if(settler.hide());
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
                         break;
                 }
             }

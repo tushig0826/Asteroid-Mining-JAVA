@@ -1,6 +1,7 @@
 package src.AsteroidMining;
 
 import java.awt.*;
+import java.io.IOException;
 
 public abstract class GameObject {
 
@@ -17,7 +18,7 @@ public abstract class GameObject {
 
     public abstract void tick();
 
-    public abstract void render(Graphics g);
+    public abstract void render(Graphics g) throws IOException;
 
     public void setX(int x) {
         this.x = x;

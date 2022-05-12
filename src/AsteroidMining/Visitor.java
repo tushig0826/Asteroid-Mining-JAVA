@@ -1,12 +1,17 @@
 package src.AsteroidMining;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public abstract class Visitor extends GameObject {
     Handler handler;
     private boolean alive=true;
     private boolean hidden=false;
     private Place place;
+
 
     public Visitor(ID id, Handler handler) {
         super(id);
@@ -22,7 +27,7 @@ public abstract class Visitor extends GameObject {
     //@Override
     public abstract void tick();
 
-    public abstract void render(Graphics g);
+    public abstract void render(Graphics g) throws IOException;
 
     public void travel(){
         System.out.println("travel()");
@@ -63,8 +68,12 @@ public abstract class Visitor extends GameObject {
     }
 
     /*Hiding in the hollow asteroid*/
-    public boolean hide(){
+    public boolean hide() throws IOException {
         System.out.println("hide()");
+   if (isHidden() ){
+       hidden = false;
+   return true;
+   }
 
         Asteroid a1 = (Asteroid) this.getPlace();
         if(a1!=null && a1.isHollow()){

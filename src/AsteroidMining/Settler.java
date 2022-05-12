@@ -14,7 +14,7 @@ public class Settler extends Visitor{
     protected SpaceShip spaceship; /*Settler's private spaceship*/
     protected Robot robot;
     private BufferedImage img = null;
-
+    private BufferedImage img2 = null;
 
 
     public Settler(int x, int y, Handler handler) {
@@ -38,8 +38,13 @@ public class Settler extends Visitor{
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(Graphics g) throws IOException {
         g.drawImage(img, x, y, 100, 100, null);
+        if (this.isHidden() ){
+            img2 = ImageIO.read(new File("Assets/settler.png"));
+            g.drawImage(img2, this.getPlace().getX()+10,  this.getPlace().getY()+10, 100, 100, null);
+        }
+
     }
 
     /*Settler mining the available asteroid*/
