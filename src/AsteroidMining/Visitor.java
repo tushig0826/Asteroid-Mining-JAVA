@@ -93,4 +93,8 @@ public abstract class Visitor extends GameObject {
     public void die() {
         this.alive=false;
     }
+
+    public boolean isAlive(){
+        return alive;
+    }
 }
