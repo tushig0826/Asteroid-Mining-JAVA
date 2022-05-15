@@ -43,6 +43,9 @@ public class KeyHandler extends KeyAdapter {
                             ex.printStackTrace();
                         }
                         break;
+                    case KeyEvent.VK_F:
+                        settler.fillAsteroid();
+                        break;
                 }
             }
         }
