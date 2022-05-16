@@ -56,7 +56,7 @@ public class Asteroid extends Place {
             }
         }else if(depth > rad/2){
             try{
-                    img = ImageIO.read(new File("Assets/DrilledA1.png"));
+                    img = ImageIO.read(new File("Assets/asteroid1.png"));
             }
             catch(IOException e){
                 e.printStackTrace();
@@ -65,7 +65,7 @@ public class Asteroid extends Place {
         }
         else if(depth < rad/2 && depth!=rad){
         try{
-            img = ImageIO.read(new File("Assets/DrilledA2.png"));
+            img = ImageIO.read(new File("Assets/asteroid2.png"));
         }
         catch(IOException e){
             e.printStackTrace();
