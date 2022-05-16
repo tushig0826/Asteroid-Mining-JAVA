@@ -1,12 +1,17 @@
 package src.AsteroidMining;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public abstract class Visitor extends GameObject {
     Handler handler;
     private boolean alive=true;
     private boolean hidden=false;
     private Place place;
+    private BufferedImage img = null;
 
     public Visitor(ID id, Handler handler) {
         super(id);
@@ -44,7 +49,6 @@ public abstract class Visitor extends GameObject {
     public boolean drill(){
         System.out.println("Drilling!");
         Asteroid a1 = (Asteroid) this.getPlace();
-
         if(a1.depth>=0) {
             a1.deepenHole(2);
             return true;
@@ -52,6 +56,7 @@ public abstract class Visitor extends GameObject {
             System.out.println("Asteroid is fully drilled!");
             return false;}
     }
+
 
 
     public Place getPlace(){

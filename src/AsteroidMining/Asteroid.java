@@ -15,6 +15,7 @@ public class Asteroid extends Place {
     protected Resource resource;
     private BufferedImage img = null;
     private boolean isPerihelion;
+    private int rad;
 
     public Asteroid(int x, int y, Resource r, int depth) {
         super(x, y, ID.Asteroid);
@@ -25,17 +26,17 @@ public class Asteroid extends Place {
             this.hollow = true;
 
         this.depth = depth;
+        this.rad = depth;
         if(resource instanceof Uranium)
             this.setId(ID.RadioActiveAsteroid);
 
         try{
-            img = ImageIO.read(new File("Assets/Asteroid.png"));
+            if(depth == depth)
+                img = ImageIO.read(new File("Assets/Asteroid.png"));
         }
         catch(IOException e){
             e.printStackTrace();
         }
-
-
     }
 
     @Override
@@ -46,14 +47,40 @@ public class Asteroid extends Place {
     @Override
     public void render(Graphics g) {
 
-        g.drawImage(img, x, y,depth*10,depth*10, null);
+        if(depth==rad) {
+            try{
+                    img = ImageIO.read(new File("Assets/Asteroid.png"));
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
+        }else if(depth > rad/2){
+            try{
+                    img = ImageIO.read(new File("Assets/DrilledA1.png"));
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
 
+        }
+        else if(depth < rad/2 && depth!=rad){
+        try{
+            img = ImageIO.read(new File("Assets/DrilledA2.png"));
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+    }
+        g.drawImage(img, x, y, rad * 10, rad * 10, null);
     }
 
 
-    public void deepenHole(int n){
-        this.depth-=n;
+
+    public void deepenHole(int n) {
+        this.depth -= n;
     }
+
     public Resource getResource(){
         return this.resource;
     }
@@ -112,6 +139,7 @@ public class Asteroid extends Place {
         ex = true;
 
     }
+
 }
 
 
