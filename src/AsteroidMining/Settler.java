@@ -2,11 +2,13 @@ package src.AsteroidMining;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Settler extends Visitor {
 
@@ -16,31 +18,65 @@ public class Settler extends Visitor {
     private BufferedImage img = null;
     private BufferedImage img2 = null;
 
+
     public Settler(int x, int y, Handler handler) {
 
         super(x, y, ID.Settler);
         spaceship = new SpaceShip();
-        //this.handler = handler;
+        this.handler = handler;
+        handler.addObject(spaceship);
+        width = 120;
+        height = 100;
 
         try {
-            img = ImageIO.read(new File("Assets/newSpaceship.png"));
+            img = ImageIO.read(new File("Assets/spaceship.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
     public void tick() {
-        x = x + velX;
-        y = y + velY;
+        if(checkCollision()){
+
+            if(!getPlace().getBounds().contains(new Point(x = x + velX*2,y = y + velY*2))){
+                x = x - velX;
+                y = y - velY*2;
+            }
+
+
+        }
+        else if(!checkCollision()){
+            hidden = false;
+            x = x + velX;
+            y = y + velY;
+            this.setPlace(null);
+            nexDestX = x;
+            nextDestY=y;
+        }
+
+    }
+    public boolean checkCollision(){
+        Rectangle rec1 = this.getBounds();
+        for(Place p1: handler.neighbours){
+            if(rec1.intersects(p1.getBounds())){
+                this.setPlace(p1);
+                return true;
+
+            }
+        }
+        return false;
     }
 
     @Override
     public void render(Graphics g) throws IOException {
-        g.drawImage(img, x, y, 100, 100, null);
+        g.drawImage(img, x, y, width, height, null);
         if (this.isHidden() ){
             img2 = ImageIO.read(new File("Assets/settler.png"));
-            g.drawImage(img2, this.getPlace().getX()+10,  this.getPlace().getY()+10, 100, 100, null);
+            Asteroid a1 = (Asteroid)getPlace();
+            g.drawImage(img2, a1.coreX,  a1.coreY, 30, 30, null);
+            System.out.println("hide!");
         }
 
     }
@@ -49,18 +85,20 @@ public class Settler extends Visitor {
     public boolean mine() {
         System.out.println("mine()");
         Asteroid a1 = (Asteroid) this.getPlace();
-        if (a1.depth <= 0 && !(a1.isHollow())) {
-            if (spaceship.checkCapacity()) {
-                spaceship.addResource(a1.getResource());
-                a1.removeResource();
-                System.out.println("mining!");
-                return true;
+        if(a1!=null) {
+            if (a1.depth <= 0 && !(a1.isHollow())) {
+                if (spaceship.checkCapacity()) {
+                    spaceship.addResource(a1.getResource());
+                    a1.removeResource();
+                    System.out.println("mining!");
+                    return true;
 
+                }
+            } else if (a1.depth >= 0) {
+                System.out.println("Asteroid is not fully drilled!");
+            } else if (a1.isHollow()) {
+                System.out.println("Asteroid is hollow, does not contain any resources");
             }
-        } else if (a1.depth >= 0) {
-            System.out.println("Asteroid is not fully drilled!");
-        } else if (a1.isHollow()) {
-            System.out.println("Asteroid is hollow, does not contain any resources");
         }
         return false;
 
@@ -104,34 +142,19 @@ public class Settler extends Visitor {
     public boolean fillAsteroid() {
         System.out.println("FillAsteroid(Resource r)");
         Asteroid a1 = (Asteroid) this.getPlace();
+        if(a1==null)return false;
         if (!a1.isFullyDrilled()) {
             System.out.println("Current asteroid is not fully drilled!");
             return false;
         }
         if (a1.isHollow()) {
             System.out.println("Select your resource to fill the asteroid!");
-            java.util.Scanner sc = new java.util.Scanner(System.in);
-            String input = sc.nextLine();
+
             Resource resource = null;
 
             /*we can select the resource */
 
-            switch (input.toLowerCase()) {
-                case "uranium":
-                    resource = spaceship.getResource(ID.Uranium);
-                    break;
-                case "iron":
-                    resource = spaceship.getResource(ID.Iron);
-                    break;
-                case "carbon":
-                    resource = spaceship.getResource(ID.Carbon);
-                    break;
-                case "waterice":
-                    resource = spaceship.getResource(ID.WaterIce);
-                    ;
-                    break;
-            }
-
+            resource = spaceship.getResource(ID.Iron);
             if (resource != null) {
                 if (spaceship.removeResource(resource)) {
                     a1.addResource(resource);

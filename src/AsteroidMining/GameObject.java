@@ -6,6 +6,7 @@ import java.io.IOException;
 public abstract class GameObject {
 
     protected int x,y, nexDestX, nextDestY, velX=0, velY=0;
+    protected int width=0, height=0;
 
     private ID id;
 
@@ -17,6 +18,10 @@ public abstract class GameObject {
     public GameObject(ID id){this.id = id;}
 
     public abstract void tick();
+
+    Rectangle getBounds(){
+        return new Rectangle(x,y, width, height);
+    }
 
     public abstract void render(Graphics g) throws IOException;
 

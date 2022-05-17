@@ -12,27 +12,37 @@ public class Asteroid extends Place {
 
     private boolean hollow=false;
     protected int depth;
-    protected Resource resource;
+    protected Resource resource=null;
     private BufferedImage img = null;
     private boolean isPerihelion;
     private int rad;
+    public int coreX, coreY;
+
 
     public Asteroid(int x, int y, Resource r, int depth) {
         super(x, y, ID.Asteroid);
 
-        if(r!=null)
-            this.resource = r;
-        else
+        if(r!=null) {
+            addResource(r);
+        }
+        else {
             this.hollow = true;
+
+        }
+
 
         this.depth = depth;
         this.rad = depth;
-        if(resource instanceof Uranium)
-            this.setId(ID.RadioActiveAsteroid);
+
+        width =rad*12;
+        height = rad*12;
+        coreX = getX()+width/2-5;
+        coreY = getY()+height/2;
+
+
 
         try{
-            if(depth == depth)
-                img = ImageIO.read(new File("Assets/Asteroid.png"));
+                img = ImageIO.read(new File("Assets/asteroid1.png"));
         }
         catch(IOException e){
             e.printStackTrace();
@@ -49,30 +59,43 @@ public class Asteroid extends Place {
 
         if(depth==rad) {
             try{
-                    img = ImageIO.read(new File("Assets/Asteroid.png"));
+                    img = ImageIO.read(new File("Assets/Asteroid1.png"));
             }
             catch(IOException e){
                 e.printStackTrace();
             }
-        }else if(depth > rad/2){
+        }else if(depth >= rad*0.75){
             try{
-                    img = ImageIO.read(new File("Assets/asteroid1.png"));
+                    img = ImageIO.read(new File("Assets/drilled1.png"));
             }
             catch(IOException e){
                 e.printStackTrace();
             }
 
         }
-        else if(depth < rad/2 && depth!=rad){
+        else if(depth >= rad*0.5){
         try{
-            img = ImageIO.read(new File("Assets/asteroid2.png"));
+            img = ImageIO.read(new File("Assets/drilled2.png"));
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        }
+        else if(depth==0){
+        try{
+            img = ImageIO.read(new File("Assets/drilled3.png"));
         }
         catch(IOException e){
             e.printStackTrace();
         }
 
     }
-        g.drawImage(img, x, y, rad * 10, rad * 10, null);
+        g.drawImage(img, x, y, width, height, null);
+        if(resource!=null && depth<=0){
+            g.drawImage(resource.getImg(), coreX, coreY, 30,30, null);
+        }
+
     }
 
 
@@ -86,6 +109,8 @@ public class Asteroid extends Place {
     }
 
     public void addResource(Resource r){
+        if(resource instanceof Uranium)
+            this.setId(ID.RadioActiveAsteroid);
         this.resource = r;
         this.hollow = false;
     }

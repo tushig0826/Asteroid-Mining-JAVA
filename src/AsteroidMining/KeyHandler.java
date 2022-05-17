@@ -1,5 +1,7 @@
 package src.AsteroidMining;
 
+import src.AsteroidMining.Resources.STATE;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -16,7 +18,7 @@ public class KeyHandler extends KeyAdapter {
 
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
-        int vel = 5;
+        int vel = 3;
         for(GameObject obj: handler.objects) {
             if (obj.getId() == ID.Settler) {
                 settler = (Settler)obj;
@@ -37,15 +39,29 @@ public class KeyHandler extends KeyAdapter {
                         settler.drill();
                         break;
                     case KeyEvent.VK_H:
-                        try {
-                            if(settler.hide());
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
+
+                        if(settler.hide());
+
                         break;
                     case KeyEvent.VK_F:
                         settler.fillAsteroid();
                         break;
+                    case KeyEvent.VK_M:
+                        settler.mine(); //mining
+                        break;
+                    case KeyEvent.VK_B:
+                        settler.buildRobot();
+                        break;
+                    case KeyEvent.VK_T:
+                        settler.buildTeleportationGates();
+                        break;
+                    case KeyEvent.VK_G:
+                        settler.deployGate();
+                        break;
+                    case KeyEvent.VK_P:
+                        game.gameState = STATE.Menu;//pausing the game
+                        break;
+
                 }
             }
         }

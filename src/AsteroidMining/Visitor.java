@@ -8,10 +8,10 @@ import java.io.IOException;
 
 public abstract class Visitor extends GameObject {
     Handler handler;
-    private boolean alive=true;
-    private boolean hidden=false;
-    private Place place;
-    private BufferedImage img = null;
+    protected boolean alive=true;
+    protected boolean hidden=false;
+    protected Place place;
+    protected BufferedImage img = null;
 
 
     public Visitor(ID id, Handler handler) {
@@ -50,6 +50,7 @@ public abstract class Visitor extends GameObject {
     public boolean drill(){
         System.out.println("Drilling!");
         Asteroid a1 = (Asteroid) this.getPlace();
+        if(a1==null) return false;
         if(a1.depth>=0) {
             a1.deepenHole(2);
             return true;
@@ -69,17 +70,16 @@ public abstract class Visitor extends GameObject {
     }
 
     /*Hiding in the hollow asteroid*/
-    public boolean hide() throws IOException {
-        System.out.println("hide()");
-   if (isHidden() ){
-       hidden = false;
-   return true;
-   }
+    public boolean hide(){
+
+        if (isHidden() ){
+            hidden = false;
+             return true;
+         }
 
         Asteroid a1 = (Asteroid) this.getPlace();
         if(a1!=null && a1.isHollow()){
-            hidden = true;
-
+            hidden = true; System.out.println("hide");
             return true;
         }
         return false;

@@ -10,5 +10,6 @@ public enum ID {
     Iron(),
     Carbon(),
     Uranium(),
-    WaterIce()
+    WaterIce(),
+    Inventory()
 }

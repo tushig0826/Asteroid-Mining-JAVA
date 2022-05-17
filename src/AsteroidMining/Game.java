@@ -1,4 +1,6 @@
 package src.AsteroidMining;
+import src.AsteroidMining.Resources.STATE;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -21,9 +23,13 @@ public class Game extends Canvas implements Runnable{
     Settler settler;
     HashMap<Resource, Integer> nResources;
     SunStorm sunStorm;
+    public static STATE gameState = STATE.Menu;
+    public boolean paused = false;
+    Menu menu;
 
     public Game(){
 
+        menu = new Menu(this, handler);
 
         handler = new Handler();
         nResources = new HashMap<Resource, Integer>();
@@ -34,15 +40,17 @@ public class Game extends Canvas implements Runnable{
 
         Settler settler = new Settler(300, 400, handler);
         Asteroid a1 = new Asteroid(100, 500, null, 10);
-        settler.setPlace(a1);
-        a1.addVisitor(settler);
+        //settler.setPlace(a1);
+        //a1.addVisitor(settler);
 
-        handler.addObject(new Asteroid(100, 200, new Carbon(), 10));
+        handler.addObject(new Asteroid(100, 150, new Carbon(), 10));
         handler.addObject(new Asteroid(400, 220, new Iron(), 10));
-        handler.addObject(new Asteroid(600, 250, new WaterIce(), 10));
+        handler.addObject(new Asteroid(700, 250, new WaterIce(), 10));
+        handler.addObject(new Asteroid(600, 500, new Uranium(), 10));
         handler.addObject(a1);
         handler.addObject(settler);
 
+        this.addMouseListener(menu);
         this.addKeyListener(new KeyHandler(handler, this));
 
         new Window(WIDTH, HEIGHT, "Asteroid Mining", this);
@@ -142,23 +150,23 @@ public class Game extends Canvas implements Runnable{
 
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.BLACK);
-
-        try{
-            backImg = ImageIO.read(new File("Assets/space.png"));
-            //g.drawImage(backImg,0,0, WIDTH/2, HEIGHT/2, null);
-            g.drawImage(backImg, 0,0,this);
+        BufferedImage op=null;
+        if(gameState==STATE.Game) {
+            try {
+                backImg = ImageIO.read(new File("Assets/space.png"));
+                op = ImageIO.read(new File("Assets/operations.png"));
+                g.drawImage(backImg, 0, 0, this);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            handler.render(g);
+            g.drawImage(op, 670, 550, 400, 150, null);
         }
-        catch(IOException e){
-            e.printStackTrace();
+        else if(gameState==STATE.Menu){
+            menu.render(g);
         }
 
-        //g.setColor(Color.black);
-        //g.fillRect(0, 0, WIDTH, HEIGHT);
 
-
-        g.drawString("Welcome to Asteroid-Mining!", 10, 10);
-
-        handler.render(g);
 
         g.dispose();
         bs.show();
